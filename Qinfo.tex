@@ -1,0 +1,143 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[a4paper, left=3cm, bottom=4cm, right=3cm]{geometry}
+
+\RequirePackage[english]{babel}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\usepackage{mathtools}
+\RequirePackage{hyperref}
+\usepackage{tikz}
+\usepackage{braket}
+
+\newcommand{\dd}{\mathop{\mathrm{d}\!}{}}
+\newcommand{\Tr}{\mathop{\mathrm{Tr}\!}{}}
+\newcommand{\deriv}[2]{\dfrac{\dd #1}{\dd #2}}
+\newcommand{\pderiv}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\HH}{\mathcal{H}}
+
+\renewcommand\bra[1]{{\langle{#1}|}}
+\makeatletter
+\renewcommand\ket[1]{%
+	\@ifnextchar\bra{\k@t{#1}\!}{\k@t{#1}}%
+}
+\newcommand\k@t[1]{{|{#1}\rangle}}
+\makeatother
+
+\bibliographystyle{alpha}
+
+\date{\today}
+\author{Bruno Bucciotti}
+\title{Quantum information 2}
+
+
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		We restrict our attention to finite dimensional systems.
+		
+		\href{https://www.youtube.com/watch?v=GyKcdbFGeV8}{90's}
+		
+	\end{abstract}
+
+	\tableofcontents
+	\clearpage
+	\section{Lecture 1}
+	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes 1_E$, $1_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
+	
+	States of $S$ are density matrices $\rho_S\in\sigma(\HH_S)$.
+	The time evolution operator is $U_{SE}(t) = \exp^{-i H_{SE} t}$. It maps $\rho_{SE}(0)$ into $\rho_{SE}(t) = U_{SE}(t) \rho_{SE}(0) U^\dagger_{SE}(t)$. Assuming the initial state factorizes into $\rho_S(0)\otimes\tau_E(0)$, we get
+	\[ \rho_S(0)\rightarrow \rho_S(t) = \Phi\left[\rho_S(0)\right] = \Tr_E\left[ U_{SE}(t) \left(\rho_S(0)\otimes\tau_E(0)\right) U^\dagger_{SE}(t) \right] \]
+	The factorization assumption may seem very restrictive, but actually reflects what happens in the lab, where your state preparation procedure outputs a state for your system which is uncorrelated with the environment, over which we have no control.
+	\vspace{5mm}
+	
+	We proceed to study all such \emph{quantum channels} $\Phi$, holding $t$ and $\tau_E(0)$ fixed.
+	
+	\noindent First, notice that $\Phi$ is a \emph{superoperator}: it acts a linear transformation on operators on $S$.
+	
+	\noindent Second, $\Phi$ is defined on \emph{all} linear operators $\mathcal{L}(\HH)$, not just $\sigma(\HH)$; in particular, observables. The extension is trivial
+	\[ \Phi\left[\hat{\Theta}\right] = \Tr_E\left[ U_{SE}(t) \left(\hat{\Theta}\otimes\tau_E(0)\right) U^\dagger_{SE}(t) \right] \]
+	and it is unique if we require linearity (\emph{proof}: any operator can be decomposed as a linear sum of density matrices). Unicity hold even for infinite dimensional systems.
+	
+	\subsection{Representations of quantum channels}
+	\subsubsection{Physical representation}
+	The one we just described.
+	\subsubsection{Stinespring representation}
+	We know we can purify a state by adding extra degrees of freedom. Suppose we purify the state of the environment $\tau_E(0)$ by adding a system $E_1$, $E' = E+E_1$. Then $\tau_E(0) = \Tr_{E_1} \left(\ket{0}_{E'}\bra{0}\right) $. Then, defining $U'_{SE'} = U_{SE} \otimes 1_{E'}$, we get (simple check)
+	\[ \Phi\left[\hat{\Theta}\right] = \Tr_{E'} \left[ U'_{SE'} \left( \hat{\Theta} \otimes \ket{0}_{E'}\bra{0} \right) {U'}^\dagger_{SE'} \right] \]
+	
+	We have thus proved that the stinespring representation is not only a special case of physical representation, but equivalent to it. They are both \emph{extrinsic} representations.
+	
+	\subsubsection{Kraus representation}
+	Kraus representation is \emph{intrinsic}, no environment needed. It is defined in terms of a Kraus set $M_k\in \mathcal{L}(\HH_S)$.
+	\[ \Phi\left[\hat{\Theta}\right] = \sum_{k=1}^D M_k \hat{\Theta} M_k^\dagger,\qquad \sum_{k=1}^D M_k^\dagger M_k = 1_S \]
+	We already know how to go from Stinespring to Kraus, we now show the other direction.%SHOW ANYWAY
+	\vspace{1mm}
+	
+	Given a Kraus set $\{M_k\}_{k=1,\dots,D}$, we want to define a system $E$, a unitary $U_{SE}$ and a state $\ket{0}$ s.t.
+	\[ \Phi\left[\hat{\Theta}\right] = \Tr_E\left[ U_{SE}(t) \left(\hat{\Theta}\otimes \ket{0}_{E}\bra{0} \right) U^\dagger_{SE}(t) \right] \]
+	Start with $E$ s.t. dim$(\HH_E) = D+1$ (actually, $D$ is enough, but the explicit construction is more difficult). Let $\ket{0}$ be any state of $E$ and extend it to an orthonormal basis $\{\ket{k}_{k=0,\dots,D}\}$ of $\HH_E$. Let the evolution be defined by the hamiltonian
+	\[ H_{SE} = \omega \sum_{K=1}^{D} M_k\otimes \ket{k}_E\bra{0} + h.c. \]
+	Then it's easy to show that for pure states $\ket{\psi}_S$ we get
+	\[ \ket{\psi}_S\ket{0}_E \rightarrow \cos(\omega t) \ket{\psi}_S\ket{0}_E - i \sin(\omega t) \sum_{k=1}^{D} M_k \ket{\psi}_S \otimes \ket{k}_E \]
+	For $\omega t= \dfrac{\pi}{2}$ we have
+	\[ \ket{\psi}_S\bra{\psi} \rightarrow \sum_{k=1}^{D} M_k \ket{\psi}_S\bra{\psi} M_k^\dagger \]
+	The extension to the general density matrix case follows from linearity.
+	
+	\subsubsection{Axiomatic representation}
+	We can describe the set of all quantum channels as the set of
+	\begin{itemize}
+		\item Linear
+		\item Completely positive
+		\item Trace preserving
+	\end{itemize}
+	maps. We remind the reader of the definition of complete positivity. Given $\Phi$ superoperator on $S$, $\Phi$ is completely positive if for all ancillas $A$
+	\[ (\Phi\otimes 1_A):\, \mathcal{L}(\HH_S\otimes \HH_A) \rightarrow \mathcal{L}(\HH_S\otimes \HH_A) \]
+	is completely positive. Complete positivity implies positivity, but not vice-versa. %GIVE EXAMPLE
+	This stronger requirement is necessary when we remember that we can always view any system $S$ as part of a larger system $S+A$, where $A$ maybe is far away and irrelevant.
+	
+	It is easy to show that all representations fulfill these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
+	
+	\subsection{Choi-Jamiolkowski isomorphism}
+	Given $\Phi$ acting on $S$, we construct an ancilla $A$ with the same dimensionality $d$ (assumed finite, but extensions do exist).
+	We first consider any orthonormal basis $\ket{k}_S$, $\ket{k}_A$ and construct
+	\[ \ket{\psi_M}_{SA} = \sum_{k=1}^{d} \dfrac{\ket{k}_S\otimes\ket{k}_A}{\sqrt{d}} \]
+	maximally entangled state. The Choi state is then defined as
+	\[ \rho_{CJ}^\Phi = \left(\Phi\otimes 1_A\right) (\ket{\psi_M}_{SA}\bra{\psi_M}) \]
+	Notice that it is indeed a state. The choice is not unique because we can always change basis. Nevertheless we can now write down a formula (proof by substitutions) for the evolution of any pure state of $S$ in terms of $\rho_{CJ}^\Phi$
+	\[ \ket{\psi}_S\bra{\psi} \rightarrow \Phi\left(\ket{\psi}_S\bra{\psi}\right) = d\, \prescript{}{A}{\braket{\psi^* | \rho_{SA}^\Phi | \psi^*}}_A \]
+	where $\ket{\psi^*}_A=\sum \alpha_k^* \ket{k}_A$ if $\ket{\psi}_S=\sum \alpha_k \ket{k}_S$. We can rewrite it as
+	\begin{equation}
+	\label{eq:1}
+	\Phi\left[ \rho_S \right] = d\, \Tr_A\left[ \left(1_S \otimes \rho_A^t \right) \rho_{SA}^\Phi \right]
+	\end{equation}
+	We immediately see the equivalence when $\rho_S$ is pure (note that $\rho_A^t=\rho_A^*$ due to hermiticity. Note the dependence on the basis chosen to define $\rho_{CJ}$); the extension to generic density matrix $\rho_S$ follows from linearity.
+	
+	To sum up, $\rho_{CJ}^\Phi$ containts all the information on $\Phi$.
+	
+	\subsubsection{From axiomatic to Kraus representation}
+	Given $\Phi$, construct the Choi state $\rho_{CJ}^\Phi$ and put it in spectral form
+	\[ \rho_{CJ}^\Phi = \sum_{\kappa=1}^{d^2} \lambda_\kappa \ket{\kappa}_{SA}\bra{\kappa} \]
+	where $\lambda\ge 0$, $\sum \lambda_\kappa = 1$. Substituting in \ref{eq:1} we obtain
+	\[ \Phi\left( \ket{\psi}_S\bra{\psi} \right) = d\, \sum \lambda_\kappa \prescript{}{A}{\braket{\psi^*|\kappa}}_{SA} \braket{\kappa|\psi^*}_A \]
+	Defining
+	\[ \ket{\chi_{l \kappa}}_S \equiv \prescript{}{A}{\braket{l|\kappa}}_{SA} \]
+	we get
+	\begin{equation}
+	\label{eq:2}
+	\Phi\left( \ket{\psi}_S\bra{\psi} \right) = d\, \sum \lambda_\kappa \alpha_l\alpha^*_m \ket{\chi_{l\kappa}}_S\bra{\chi_{m\kappa}}
+	\end{equation}
+	which is \emph{almost} of the form $\sum M_k \ket{\psi}\bra{\psi}M_k^\dagger$. To get there, we further define
+	\[ M_\kappa \ket{l}_S  = \sqrt{d\lambda\kappa} \ket{\chi_{l\kappa}}_S \]
+	so that from \ref{eq:2} we get
+	\[ \Phi\left( \ket{\psi}_S\bra{\psi} \right) = \sum \alpha_l\alpha^*_m M_\kappa \ket{l}_S\bra{m}  M_\kappa^\dagger \]
+	Summing over $l,m$ finally results in
+	\[ \Phi\left( \ket{\psi}_S\bra{\psi} \right) = \sum_{\kappa=1}^{d^2} M_\kappa \ket{\psi}_S\bra{\psi} M_\kappa^\dagger \]
+	The identity
+	\[ \Tr_S\left[\Phi\left(\ket{\psi}_S\bra{\psi}\right)\right] = 1 = \sum_\kappa \braket{\psi|M_\kappa^\dagger M_\kappa | \psi} \]
+	holds for all $\ket{\psi}$ and shows that $\sum M_\kappa^\dagger M_\kappa = 1$, implying that $\{M_\kappa\}$ is a good Kraus set.
+	
+	\section{Lecture 2}
+	
+\end{document}
