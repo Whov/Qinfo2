@@ -73,8 +73,8 @@
 	Kraus representation is \emph{intrinsic}, no environment needed. It is defined in terms of a Kraus set $M_k\in \mathcal{L}(\HH_S)$.
 	\[ \Phi\left[\hat{\Theta}\right] = \sum_{k=1}^D M_k \hat{\Theta} M_k^\dagger,\qquad \sum_{k=1}^D M_k^\dagger M_k = 1_S \]
 	We already know how to go from Stinespring to Kraus, we now show the other direction.%SHOW ANYWAY
-	\vspace{1mm}
 	
+	\subsubsection{From Kraus to Stinespring}
 	Given a Kraus set $\{M_k\}_{k=1,\dots,D}$, we want to define a system $E$, a unitary $U_{SE}$ and a state $\ket{0}$ s.t.
 	\[ \Phi\left[\hat{\Theta}\right] = \Tr_E\left[ U_{SE}(t) \left(\hat{\Theta}\otimes \ket{0}_{E}\bra{0} \right) U^\dagger_{SE}(t) \right] \]
 	Start with $E$ s.t. dim$(\HH_E) = D+1$ (actually, $D$ is enough, but the explicit construction is more difficult). Let $\ket{0}$ be any state of $E$ and extend it to an orthonormal basis $\{\ket{k}_{k=0,\dots,D}\}$ of $\HH_E$. Let the evolution be defined by the hamiltonian
@@ -99,7 +99,7 @@
 	
 	It is easy to show that all representations fulfill these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
 	
-	\subsection{Choi-Jamiolkowski isomorphism}
+	\subsection{Choi-Jamiolkowski construction}
 	Given $\Phi$ acting on $S$, we construct an ancilla $A$ with the same dimensionality $d$ (assumed finite, but extensions do exist).
 	We first consider any orthonormal basis $\ket{k}_S$, $\ket{k}_A$ and construct
 	\[ \ket{\psi_M}_{SA} = \sum_{k=1}^{d} \dfrac{\ket{k}_S\otimes\ket{k}_A}{\sqrt{d}} \]
@@ -136,8 +136,120 @@
 	\[ \Phi\left( \ket{\psi}_S\bra{\psi} \right) = \sum_{\kappa=1}^{d^2} M_\kappa \ket{\psi}_S\bra{\psi} M_\kappa^\dagger \]
 	The identity
 	\[ \Tr_S\left[\Phi\left(\ket{\psi}_S\bra{\psi}\right)\right] = 1 = \sum_\kappa \braket{\psi|M_\kappa^\dagger M_\kappa | \psi} \]
-	holds for all $\ket{\psi}$ and shows that $\sum M_\kappa^\dagger M_\kappa = 1$, implying that $\{M_\kappa\}$ is a good Kraus set.
+	holds for all $\ket{\psi}$ and shows that $\sum M_\kappa^\dagger M_\kappa = 1$, implying that $\{M_\kappa\}$ is a good Kraus set. Our proof also shows that you can always do with at most $d^2$ Kraus operators, where $d$ is the dimensionality of your system $S$.
 	
 	\section{Lecture 2}
+	We begin with 2 two observations.
+	\paragraph{Upper bounds}
+	We observe that unitary evolution $\rho\rightarrow U\rho U^\dagger$ is a CPT map whose Kraus set is singlet $\{U\}$, showing that $d^2$ is \emph{an upper bound} on the \emph{needed} Kraus operators.
+
+	\noindent Further, considering that a Kraus representation $\{M_k\}_{k=1,\dots,D}$ can be converted to a Stinespring representation where the environment has dimension $D$, we deduce that a system of dimensionality $d$ always admits a Stinespring representation with environment at most $d^2$ dimensional.
+	\vspace{2mm}
+	
+	\paragraph{Process tomography}
+	In analogy with state tomography, we want an experimental procedure which will allow us to determine the action of some unknown map $\Phi$ with finitely many measurements (to arbitrary accuracy). There are two ways to go.
+	\begin{enumerate}
+		\item We can appropriately choose $d^2$ states $\{\rho_j\}$, let $\Phi$ act on each and do state tomography. Notice that if we need $n$ copies of a state to determine it with the prescribed accuracy, then $n*d^2$ state preparations (and measurements) will be required.
+		\item We can be clever and exploit the Choi state. First, notice that you can prepare it experimentally: you attach an ancilla $A$ to $S$, prepare $\ket{\psi_M}_{SA}$ and let $\Phi$ act on $S$. Then, doing state tomography $n$ times, you determine $\rho_{CJ}^\Phi$ and therefore $\Phi$.
+	\end{enumerate}
+	The speedup of the second method relies on our ability to construct a maximally entangled state. This is a first instance of \emph{entanglement as a resource}.
+	
+	\subsection{Distances on the set of quantum channels}
+	We begin with a few remarks on the set $\mathcal{C}(\HH_S)$ of quantum channels on $S$.
+	\begin{enumerate}
+		\item $\mathcal{C}$ is closed under convex combinations
+		\item $\mathcal{C}$ is closed under composition (which is \emph{not} commutative)
+		\item Composition gives $\mathcal{C}$ a semigroup structure (remember that noisy channels have no inverse)
+	\end{enumerate}
+	\vspace{2mm}
+	\subsubsection{Trace distance}
+	We now introduce our first distance on $\mathcal{C}(\HH_S)$. The idea is to apply $\Phi_{1,2}$ to a state and measure their distance, than take the $\sup$ over all states.
+	\[ D_1(\Phi_1, \Phi_2) = \sup_{\rho\in \sigma(\HH_S)} d_1\left( \Phi_1(\rho), \Phi_2(\rho) \right) \]
+	where $d_1$ is the trace distance between states. This distance is not very good because entanglement with an ancilla should help distinguish quantum channels (see ref. [4-8] in \href{https://arxiv.org/abs/1004.4110}{Benenti,Strini, 2010}).
+	
+	\subsubsection{Diamond distance}
+	We instead consider the diamond distance $D_\diamond$, defined as
+	\[ D_\diamond\left(\Phi_1, \Phi_2 \right) = D_1\left( \Phi_1\otimes 1_A, \Phi_2 \otimes 1_A \right) \]
+	where $A$ is an ancillary system of dimensionality equal to that of $S$.
+	
+	\noindent This distance is bounded even when considering multiple copies of the same channel.
+	
+	We notice that
+	\[ D_\diamond(\Phi_1, \Phi_2) \ge d_1\left( (\Phi_1\otimes 1_A)(\rho_M), (\Phi_2\otimes 1_A)(\rho_M) \right),\quad \rho_M = \ket{\psi_M}_{SA}\bra{\psi_M} \]
+	so
+	\[ D_\diamond (\Phi_1, \Phi_2) \ge d_1\left(\rho_{CJ}^{\Phi_1},\,\, \rho_{CJ}^{\Phi_2}\right) \]
+	
+	\subsubsection{Choi state peculiarity}
+	The Choi-Jamiolkowski construction is often dubbed "isomorphism" but, as we will now see, the Choi state $\rho_{CJ}$ possesses some nontrivial properties. Taking the trace over $S$ and making various trivial substitutions results in
+	\[ \Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_{j,k=1} \Tr\left[\Phi(\ket{j}_S\bra{k})\right] \ket{j}_A\bra{k} \]
+	exploiting the trace preserving property of $\Phi$ we get
+	\[ \Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_k \ket{k}_A\bra{k} = \dfrac{1}{d} 1_A \]
+	Therefore a Choi state reduces to a maximally mixed state on the ancilla.
+	
+	\subsection{Adjoint channel}
+	We know from standard quantum mechanics that we can consider equivalently the Schroedinger picture or the Heisenberg picture. We already generalized the Schroedinger picture to CPT maps $\Phi$, we now want to do the same for the Heisenberg picture.
+	\vspace{2mm}
+	
+	\noindent Working in Kraus representation, $\Phi(\rho) = \sum M_k \rho M_k^\dagger$.
+	\[ \braket{O}_{\Phi(\rho)} = \Tr\left[ \hat{O}\, \Phi(\rho) \right] = \Tr\left[\sum_k \hat{O}\, M_k\rho M_k^\dagger \right] =
+	\Tr\left[ \left(\sum_k M_k^\dagger \hat{O}M_k\right)\rho \right] \equiv \Tr\left[ \Phi_H \rho \right] \]
+	where we defined ($H$ stands for Heisenberg)
+	\[ \Phi_H(\hat{O}) = \sum_k M_k^\dagger \hat{O} M_k \]
+	
+	$\Phi_H$ is called the adjoint channel, because remembering that $\braket{A|B} = \Tr\left[A^\dagger B\right]$ is a scalar product, we get
+	\[ \braket{A|\Phi(B)} = \braket{\Phi_H(A)|B} \]
+	It is a linear, completely positive superoperator, but it is \textbf{not} trace preserving.
+	\[ 1 = \sum M_k^\dagger M_k \neq \sum M_k M_k^\dagger \]
+	\noindent Indeed this property is replaced by $\Phi_H(1) = 1$, which is easily verified and goes under the name of \emph{unital property}.
+	\vspace{3mm}
+	
+	The action of $\Phi_H$ in Stinespring representation is left as an exercise, but (my) result is
+	\[ \hat{O}_S \rightarrow \prescript{}{E}{\braket{0|U_{SE}^\dagger (\hat{O}_S\otimes 1_E) U_{SE}|0}_E} \]
+	
+	\subsection{Complementary channel}
+	Consider the Stinespring representation of a quantum channel $\Phi$. We can picture the evolution as a sort of "scattering" of system $S$ in state $\rho$ with system $E$ in state $\ket{0}_E$. The output is of course
+	\[ U_{SE} \left(\rho\otimes \ket{0}_E\bra{0}\right) U_{SE}^\dagger \]
+	If we trace out $E$ we are left with $\Phi(\rho)$ by definition, but if we trace out $S$ then we are left with a state of $E$. We can therefore define
+	\[ \tilde{\Phi}: \sigma(\HH_S)\rightarrow \sigma(\HH_E),\qquad \tilde{\Phi}(\rho) = \Tr_S\left[ U_{SE} \left(\rho\otimes \ket{0}_E\bra{0}\right) U_{SE}^\dagger \right] \]
+	This map is easily verified to be linear completely positive and trace preserving. Note that complete positivity means that a positive operator, which (up to rescaling by a positive constant) we can assume to be a density matrix $\rho_{SA}$, gets mapped to a positive operator $\rho'_{AE}$.
+	
+	There is some freedom in choosing the Stinespring representation, but two different choices leading say to $\tilde{\Phi}$, $\tilde{\Phi}'$ are unitary equivalent, meaning there exist $U,V$ unitary s.t. $\tilde{\Phi}'(\rho) = V \tilde{\Phi}\left( U \rho U^\dagger \right) V^\dagger$ (proof left as an exercise).
+	
+	Lastly, notice that if we work in physical representation instead of Stinespring then our freedom in choosing the representation is even larger.
+	We will end up with $\tilde{\Phi}_W$, $\tilde{\Phi}_W'$ ($_W$ stands for \emph{weak}) not necessarily unitary equivalent. The set of weak complementary channels originating from a given $\Phi$ is considerably harder to study, because different $\tilde{\Phi}$'s represent different physics.
+	
+	\section{Lecture 3}
+	We begin with a comment on complementary channels from last lecture. Knowing $\Phi(\rho),\tilde{\Phi}(\rho)$ means knowing the two partial traces of the full system $SE$, but we are still missing correlations. Conclusion: $\Phi,\tilde{\Phi}$ contain less information than $U_{SE}$.
+	
+	\subsection{Degradability}
+	We say that a channel $\Phi$ is degradable if there exists $\Lambda:\mathcal{L}(\HH_S)\rightarrow\mathcal{L}(\HH_E)$ LCPT s.t.
+	\[ \tilde{\Phi}(\rho) = \Lambda \circ \Phi(\rho) \quad \forall \rho \]
+	The physical meaning is that we can \emph{degrade} the state of the system $S$ through some noise and obtain the state of $E$. The state of the environment contains no additional information; $\Phi$ can carry more information than $\tilde{\Phi}$.
+	
+	\paragraph{Example} $\Phi = 1_S$ is a degradable channel. Proof: Given $\tilde{\Phi}$ complementary channel of the identity, I claim that $\Lambda = \tilde{\Phi}$ is the right map. It is LCPT and $\tilde{\Phi} = \tilde{\Phi} \circ 1$.
+	
+	\subsection{Anti-degradability}
+	We say that a channel $\Phi$ is anti-degradable if there exists $\Lambda':\mathcal{L}(\HH_E)\rightarrow\mathcal{L}(\HH_S)$ LCPT s.t.
+	\[ {\Phi}(\rho) = \Lambda' \circ \tilde{\Phi}(\rho) \quad \forall \rho \]
+	Remarks opposite to the previous case hold.
+	
+	\paragraph{Example} $\Phi(\rho) = \bar{\rho}$. Turn this into a well defined quantum channel (remember the domain is $\mathcal{L}(\HH_S)$, not $\sigma(\HH_S)$), prove LCPT and show that it is anti-degradable.
+	
+	\emph{Solution} We begin by defining $\Phi(\theta) = \Tr[\theta] \bar{\rho}$. It reduces to the right $\Phi$ on density matrices and it is trace preserving by definition. Linearity being obvious, we are left with complete positivity. Instead of proving it, we take a different route. We can exhibit a Stinespring representation of $\Phi$, that is a unitary $U_{SE}$ s.t., tracing out $E$, $\rho\rightarrow \bar{\rho}$. Then we know that a superoperator $\Phi$ given in Stinespring representation is LCPT.
+	
+	Write $\bar{\rho} = \sum_{k=1}^{d} \lambda_k \ket{k}_S\bra{k}$, $\lambda_k\ge 0$, $\braket{j|k} = \delta_{jk}$ a basis. We will define $d$ unitary matrices in a moment, but for now let us call them $V_i$. We define $U_{SE}$ on $\ket{k}_S\ket{0}_E$ as
+	\[ U_{SE} (\ket{i}_S\ket{0}_E) = \sum_{k=1}^{d} \sqrt{\lambda_k} \ket{k}_S \otimes (V_i\ket{k}_E) \]
+	The idea was to write the most general purification of $\bar{\rho}$, where we keep the dependence of $V$ on the input $i$. A unitary extension of $U_{SE}$ to all $\HH_S\otimes \HH_E$ is always possible if we prove
+	\[ \prescript{}{E}{\bra{0}} \prescript{}{S}{\bra{i}} U_{SE}^\dagger U_{SE} \ket{j}_S\ket{0}_E = \delta_{ij} \]
+	After a few steps we are left with
+	\[ \sum_{k} \lambda_k\prescript{}{E}{\braket{k|V_i^\dagger V_j | k}_E} = \delta_{ij} \]
+	All is left to do is pick the $d$ unitaries s.t. $\prescript{}{E}{\braket{k|V_i^\dagger V_j | k}_E} = 0$ if $i\neq j$ ($i=j$ is trivial). Observe that
+	\[ V_k \ket{i} = \ket{i+k-1 \mod d},\qquad V_k^\dagger\ket{i} = \ket{i+1-k \mod d} \]
+	is unitary and satisfies the above requirement.
+	
+	Finally, $\Phi$ is anti-degradable because $\Phi = \Lambda' \circ \tilde{\Phi}$ holds if we simply pick $\Lambda = \Phi$, which is LCPT as we have just seen.
+	
+	\subsection{Weak (anti-)degradability}
+	Non mi è chiaro un punto: le definizioni ok. Se però mi dici weak anti-deg coimplica anti-deg, non mi è chiaro se nel trasformare da $\ket{0}_E$ in $\tau_E$ devo mantenere fisso l'output su $S$ o l'unitaria $U_{SE}$.
 	
 \end{document}

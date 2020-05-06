@@ -15,11 +15,4 @@ jobs:
         with:
           name: appunti
           path: Qinfo.pdf
-      - name: Upload to uz
-        uses: sebastianpopp/ftp-action@releases/v2
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "."
-          remoteDir: "."
+
