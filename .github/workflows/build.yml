@@ -7,6 +7,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v1
       - name: Compile LaTeX document
-        uses: dante-ev/latex-action@master
+        uses: ./
         with:
           root_file: Qinfo.tex
+          working_directory: ./
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: appunti
+          path: Qinfo.pdf
