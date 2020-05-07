@@ -16,6 +16,9 @@
 \newcommand{\pderiv}[2]{\dfrac{\partial #1}{\partial #2}}
 \newcommand{\HH}{\mathcal{H}}
 
+\newcommand\braa[1]{{\langle\langle{#1}|}}
+\newcommand\kett[1]{{|{#1}\rangle\rangle}}
+
 \renewcommand\bra[1]{{\langle{#1}|}}
 \makeatletter
 \renewcommand\ket[1]{%
@@ -207,7 +210,7 @@
 	\[ \hat{O}_S \rightarrow \prescript{}{E}{\braket{0|U_{SE}^\dagger (\hat{O}_S\otimes 1_E) U_{SE}|0}_E} \]
 	
 	\subsection{Complementary channel}
-	Consider the Stinespring representation of a quantum channel $\Phi$. We can picture the evolution as a sort of "scattering" of system $S$ in state $\rho$ with system $E$ in state $\ket{0}_E$. The output is of course
+	Consider a Stinespring representation of a quantum channel $\Phi$. We can picture the evolution as a sort of "scattering" of system $S$ in state $\rho$ with system $E$ in state $\ket{0}_E$. The output is of course
 	\[ U_{SE} \left(\rho\otimes \ket{0}_E\bra{0}\right) U_{SE}^\dagger \]
 	If we trace out $E$ we are left with $\Phi(\rho)$ by definition, but if we trace out $S$ then we are left with a state of $E$. We can therefore define
 	\[ \tilde{\Phi}: \sigma(\HH_S)\rightarrow \sigma(\HH_E),\qquad \tilde{\Phi}(\rho) = \Tr_S\left[ U_{SE} \left(\rho\otimes \ket{0}_E\bra{0}\right) U_{SE}^\dagger \right] \]
@@ -250,6 +253,60 @@
 	Finally, $\Phi$ is anti-degradable because $\Phi = \Lambda' \circ \tilde{\Phi}$ holds if we simply pick $\Lambda = \Phi$, which is LCPT as we have just seen.
 	
 	\subsection{Weak (anti-)degradability}
-	Non mi è chiaro un punto: le definizioni ok. Se però mi dici weak anti-deg coimplica anti-deg, non mi è chiaro se nel trasformare da $\ket{0}_E$ in $\tau_E$ devo mantenere fisso l'output su $S$ o l'unitaria $U_{SE}$.
+	Let us extend the concept of (anti)-degradability to the physical representation. Suppose you are given a quantum channel $\Phi$. A channel $\tilde{\Phi}_W$ is called \emph{weak complementary} of $\Phi$ if there are $\tau_E$, $U_{SE}$ s.t.
+	\[ \Phi(\rho) = \Tr_E \left[ U_{SE} (\rho\otimes \tau) U_{SE}^\dagger \right],\qquad
+	\tilde{\Phi}_W(\rho) = \Tr_S \left[ U_{SE} (\rho\otimes \tau) U_{SE}^\dagger \right] \]
+	We say that $\Phi$ is weakly degradable if there is $\Lambda$ LCPT s.t.
+	\[ \tilde{\Phi}_W \equiv \Lambda \circ \Phi \]
+	and similarly for weak anti-degradability
+	\[ \Phi \equiv \Lambda \circ \tilde{\Phi}_W \]
+	Propositions:
+	\begin{itemize}
+		\item anti-degradability is equivalent to weak anti-degradability
+		\item degradability implies weak degradability (not vice-versa)
+	\end{itemize}
+	One implication is easy: take a purification of $\tau_E$, for example $\ket{\phi}_{AE}$ s.t. $\Tr_A\left[ \ket{\phi}\bra{\phi} \right] = \tau_E$. Then $U_{SE}\otimes 1_A$, $\ket{\phi}_{AE}$ are a Stinespring representation for $\Phi$ with environment AE.
+	
+	Define
+	\[ \tilde{\Phi}_{AE}(\rho) = \Tr_S\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] \]
+	and observe that
+	\[ \Phi(\rho) = \Tr_{AE}\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] \]
+	\[ \tilde{\Phi}_W(\rho) = \Tr_{AS}\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] = \Tr_A\left[\tilde{\Phi}_{AE}(\rho)\right] \]
+	If $\Phi$ is degradable, then $\tilde{\Phi}_{AE} = \Lambda \circ \Phi$. Thus we can take the output of $\Phi$, process it with $\Lambda$ and then trace out the ancilla to get $\tilde{\Phi}_W(\rho)$.
+	
+	\subsection{Compatible channels}
+	Two quantum channels $\Phi_1:S\rightarrow S_1$ $\Phi_2:S\rightarrow S_2$ are said to be compatible if there is $\Phi_{12}:S\rightarrow (S_1+S_2)$ s.t.
+	\[ \Phi_1(\rho) = \Tr_2\left[\Phi_{12}(\rho)\right],\qquad
+	\Phi_2(\rho) = \Tr_1\left[\Phi_{12}(\rho)\right] \]
+	Not all channels are compatible, and this language of "compatibility" can be used to rephrase the uncertainty principle and much more.
+	
+	\paragraph{Example}
+	$\Phi$ is an anti-degradable channel iff $\Phi$ and $\tilde{\Phi}$ are compatible. Therefore any non anti-degradable channel can be used to construct two mutually incompatible channels.
+	
+	\subsection{Spectrum of LCPT maps}
+	If there is $\theta\in \mathcal{L}(\HH_S)$ s.t. $\Phi(\theta) = \lambda \theta$, then $\lambda$ is called an eigenvalue of $\Phi$. The set $Sp(\Phi)$ of all $\lambda$'s is called spectrum of $\Phi$.
+	
+	$\lambda\in Sp(\Phi) \rightarrow \lambda^* \in Sp(\Phi)$. Simply evaluate $\Phi$ of $\theta$ and $\theta^\dagger$ and observe that $(\Phi(\theta))^\dagger = \Phi(\theta^\dagger)$ (use the Kraus form of $\Phi$).
+	
+	$\forall\, \lambda\in Sp(\Phi)$, $|\lambda|\le 1$. This comes from the contractivity of $\Phi$.
+	
+	$\forall\,\Phi$ $\lambda=1$ is in the spectrum, that is $\Phi(\theta)=\theta$ always admits a nonzero solution. I attempt a proof (not checked!): either $\Phi$ is not strictly contractive, then it is unitary and any eigenvector evolves with a phase, that is the state is invariant; or $\Phi$ is contractive, then Banach-Caccioppoli theorem guarantees the existence of a fixed point.
+	
+	\subsection{Ergodic channels}
+	Consider a channel $\Phi$ and call $\Phi^2\equiv \Phi\circ\Phi$, $\Phi^3\equiv\dots$ We can imagine a system initialized in a state $\rho$ which evolves in time and becomes $\Phi(\rho),\Phi^2(\rho)\dots$ Consider the sequence
+	\[ \sigma_n = \dfrac{\rho + \Phi(\rho) \dots +\Phi^n(\rho)}{n+1} \]
+	of the averages. If it converges to some $\rho_0$ $\mathbf{independent}$ of $\rho$, then the channel is called \emph{ergodic}. A channel is ergodic iff $\lambda=1$ is nondegenerate (if degenerate, the sequence converges to $\theta_1$ or $\theta_2$ depending on the input).
+	
+	\subsection{Mixing channels}
+	Analogously, $\Phi$ is \emph{mixing} if $\Phi^n(\rho)$ converges to some $\bar{\rho}$ independent of $\rho$. Due to Cesaro summation theorem, mixing implies ergodic; the converse is not true. The set of mixing channels is dense in the set of all channels; actually the space of all channels is convex, and the whole bulk is mixing.
+	
+	\subsection{Liouville space representation}
+	We now want to write down matrices for our superoperators. In order to do so, we need a way to write operators (on $\HH$) as vectors. To this end, we introduce the notation $\kett{\theta}$.
+	\[ \theta = \sum \braket{i|\theta|j} \ket{i}\bra{j},\qquad \kett{\theta} = \sum \braket{i|\theta|j} \ket{i}\ket{j} \]
+	What we did was actually introducing a noncanonical isomorphism $\HH\rightarrow \HH^*$ thru which we mapped $\HH^*\otimes \HH$ to $\HH^{\otimes 2}$. We give some examples.
+	\[ 1 \rightarrow \kett{1} = \sum_{i=1}^d \ket{i}\ket{i} \]
+	which is a maximally entangled not-normalized state. It is a simple calculation to show that
+	\[ \kett{\theta} = (\theta \otimes 1) \kett{1} = (1 \otimes \theta^t) \kett{1} \]
+	\[ \langle\braket{\theta|\Omega}\rangle = \Tr\left[ \theta^\dagger \Omega \right] \]
 	
 \end{document}
