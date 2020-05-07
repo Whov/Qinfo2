@@ -109,11 +109,11 @@
 	maximally entangled state. The Choi state is then defined as
 	\[ \rho_{CJ}^\Phi = \left(\Phi\otimes 1_A\right) (\ket{\psi_M}_{SA}\bra{\psi_M}) \]
 	Notice that it is indeed a state. The choice is not unique because we can always change basis. Nevertheless we can now write down a formula (proof by substitutions) for the evolution of any pure state of $S$ in terms of $\rho_{CJ}^\Phi$
-	\[ \ket{\psi}_S\bra{\psi} \rightarrow \Phi\left(\ket{\psi}_S\bra{\psi}\right) = d\, \prescript{}{A}{\braket{\psi^* | \rho_{SA}^\Phi | \psi^*}}_A \]
+	\[ \ket{\psi}_S\bra{\psi} \rightarrow \Phi\left(\ket{\psi}_S\bra{\psi}\right) = d\, \prescript{}{A}{\braket{\psi^* | \rho_{CJ}^\Phi | \psi^*}}_A \]
 	where $\ket{\psi^*}_A=\sum \alpha_k^* \ket{k}_A$ if $\ket{\psi}_S=\sum \alpha_k \ket{k}_S$. We can rewrite it as
 	\begin{equation}
 	\label{eq:1}
-	\Phi\left[ \rho_S \right] = d\, \Tr_A\left[ \left(1_S \otimes \rho_A^t \right) \rho_{SA}^\Phi \right]
+	\Phi\left[ \rho_S \right] = d\, \Tr_A\left[ \left(1_S \otimes \rho_A^t \right) \rho_{CJ}^\Phi \right]
 	\end{equation}
 	We immediately see the equivalence when $\rho_S$ is pure (note that $\rho_A^t=\rho_A^*$ due to hermiticity. Note the dependence on the basis chosen to define $\rho_{CJ}$); the extension to generic density matrix $\rho_S$ follows from linearity.
 	
@@ -186,7 +186,10 @@
 	The Choi-Jamiolkowski construction is often dubbed "isomorphism" but, as we will now see, the Choi state $\rho_{CJ}$ possesses some nontrivial properties. Taking the trace over $S$ and making various trivial substitutions results in
 	\[ \Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_{j,k=1} \Tr\left[\Phi(\ket{j}_S\bra{k})\right] \ket{j}_A\bra{k} \]
 	exploiting the trace preserving property of $\Phi$ we get
-	\[ \Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_k \ket{k}_A\bra{k} = \dfrac{1}{d} 1_A \]
+	\begin{equation}
+	\label{eq:7}
+	\Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_k \ket{k}_A\bra{k} = \dfrac{1}{d} 1_A
+	\end{equation}
 	Therefore a Choi state reduces to a maximally mixed state on the ancilla.
 	
 	\subsection{Adjoint channel}
@@ -263,7 +266,7 @@
 	Propositions:
 	\begin{itemize}
 		\item anti-degradability is equivalent to weak anti-degradability
-		\item degradability implies weak degradability (not vice-versa)
+		\item degradability implies weak degradability (not vice-versa). W/o proof.
 	\end{itemize}
 	One implication is easy: take a purification of $\tau_E$, for example $\ket{\phi}_{AE}$ s.t. $\Tr_A\left[ \ket{\phi}\bra{\phi} \right] = \tau_E$. Then $U_{SE}\otimes 1_A$, $\ket{\phi}_{AE}$ are a Stinespring representation for $\Phi$ with environment AE.
 	
@@ -295,7 +298,7 @@
 	\subsection{Ergodic channels}
 	Consider a channel $\Phi$ and call $\Phi^2\equiv \Phi\circ\Phi$, $\Phi^3\equiv\dots$ We can imagine a system initialized in a state $\rho$ which evolves in time and becomes $\Phi(\rho),\Phi^2(\rho)\dots$ Consider the sequence
 	\[ \sigma_n = \dfrac{\rho + \Phi(\rho) \dots +\Phi^n(\rho)}{n+1} \]
-	of the averages. If it converges to some $\rho_0$ $\mathbf{independent}$ of $\rho$, then the channel is called \emph{ergodic}. A channel is ergodic iff $\lambda=1$ is nondegenerate (if degenerate, the sequence converges to $\theta_1$ or $\theta_2$ depending on the input).
+	of the averages. If it converges to some $\rho_0$ $\bf{independent}$ of $\rho$, then the channel is called \emph{ergodic}. A channel is ergodic iff $\lambda=1$ is nondegenerate (if degenerate, the sequence converges to $\theta_1$ or $\theta_2$ depending on the input).
 	
 	\subsection{Mixing channels}
 	Analogously, $\Phi$ is \emph{mixing} if $\Phi^n(\rho)$ converges to some $\bar{\rho}$ independent of $\rho$. Due to Cesaro summation theorem, mixing implies ergodic; the converse is not true. The set of mixing channels is dense in the set of all channels; actually the space of all channels is convex, and the whole bulk is mixing.
@@ -306,7 +309,116 @@
 	What we did was actually introducing a noncanonical isomorphism $\HH\rightarrow \HH^*$ thru which we mapped $\HH^*\otimes \HH$ to $\HH^{\otimes 2}$. We give some examples.
 	\[ 1 \rightarrow \kett{1} = \sum_{i=1}^d \ket{i}\ket{i} \]
 	which is a maximally entangled not-normalized state. It is a simple calculation to show that
-	\[ \kett{\theta} = (\theta \otimes 1) \kett{1} = (1 \otimes \theta^t) \kett{1} \]
+	\begin{equation}
+	\label{eq:3}
+	\kett{\theta} = (\theta \otimes 1) \kett{1} = (1 \otimes \theta^t) \kett{1}
+	\end{equation}
 	\[ \langle\braket{\theta|\Omega}\rangle = \Tr\left[ \theta^\dagger \Omega \right] \]
+	
+	\section{Lecture 4}
+	\subsection{Matrix representation for q. channels}
+	By making repeated use of identity \ref{eq:3} we deduce the ABC rule
+	\begin{equation}
+	\label{eq:4}
+	\kett{ABC} = (A\otimes C^t)\kett{B}
+	\end{equation}
+	and from it 
+	\[ \kett{\Phi(\theta)} = \kett{\sum_k M_k\theta M_k^\dagger} = \sum_k \kett{M_k \theta M_k^\dagger} = \sum_k (M_k\otimes M_k^*) \kett{\theta} \]
+	Thus $M_\Phi = \sum_k M_k \otimes M_k^*$ is a representation of $\Phi$. The spectrum of $\Phi$ is equal to the spectrum of $M_\Phi$. Notice that $M_\Phi$ is not a normal operator, therefore it cannot be diagonalized.
+	
+	\subsection{Quantum operations}
+	We generalize the notion of quantum channel to \emph{quantum operations}: linear completely positive trace reducing maps, that is
+	\[ \Lambda\left[\theta\right]\,s.t.\,\Tr\left[\Lambda[\theta]\right] \le \Tr[\theta] \]
+	These maps can be physically realized if the true evolution happens in a larger space. Quantum operations admit a (sort of) Kraus decomposition where $\sum_k M_k^\dagger M_k \le 1_S$.
+	
+	\subsubsection{POVM}
+	We recall some basic facts about POVM, which will play a role shortly.
+	
+	A POVM is a set $\{E_j\}$ of operators s.t. $\sum E_j = 1_S$, $E_j\ge 0$. They represent measurements: each $j$ is one possible outcome of the measurement associated with the POVM. How do we use them?
+	The probability of outcome $j$ is
+	\[ p_j(\rho) = \Tr\left[ E_j \rho \right] \]
+	and the state after the measurement is (supposing $j$ came out)
+	\begin{equation}
+	\label{eq:5}
+	\dfrac{U_j \sqrt{E_j} \rho \sqrt{E_j} U_j^\dagger}{p_j}
+	\end{equation}
+	where $U_j$ depends on the details of the system.
+	
+	\subsubsection{POVM and quantum operations}
+	If we make a measurement on $S$ described by a POVM $\{E_j\}$ and we trash away our knowledge on the outcome, the final state of the system is
+	\[ \rho\rightarrow \sum_j p_j \dfrac{U_j \sqrt{E_j} \rho \sqrt{E_j} U_j^\dagger}{p_j} = \sum_j U_j \sqrt{E_j} \rho \sqrt{E_j} U_j^\dagger \]
+	This map is a quantum channel (LCPT). If we keep the information on the outcome, then the state is given by \ref{eq:5}. This is not a quantum channel, but it is a quantum operation whose Kraus set is the singlet $U_j\sqrt{E_j}$. Quantum operations are therefore very relevant in measurement theory.
+	
+	\subsection{Examples of quantum channels}
+	\subsection{Unital quantum channels}
+	A channel is called unital if $\Phi(1_S) = 1_S$. Put differently, the maximally mixed state is a fixed point. Unitary maps are unital
+	\[ \Phi(\rho) = U\rho U^\dagger,\qquad 1_S \rightarrow 1_S \]
+	Unital channels are $\mathbf{closed}$ under convex combinations.
+	
+	\subsubsection{Adjoint channel}
+	Let us compute the matrix representation of $\Phi_H$. Recall that
+	\[ \Tr\left[\theta \Phi(\rho)\right] = \Tr\left[ \Phi_H(\theta) \rho \right] = \langle\braket{\theta|\Phi(\rho)}\rangle = \langle \braket{\theta|M_\Phi|\rho}\rangle = \langle\braket{\Phi_H(\theta)|\rho}\rangle \]
+	$\forall\,\rho$, therefore
+	\[ \kett{\Phi_H(\theta)} = (M_\Phi)^\dagger \kett{\theta} \]
+	Conclusion
+	\[ M_{\Phi_H} = (M_\Phi)^\dagger \]
+	We note that if $\Phi=\Phi_H$ then the channel is called \emph{self-adjoint}. All self-adjoint channels are unital ($\Phi_H$ are always).
+	
+	\subsubsection{Qubit channels}
+	For qubit unital channels we have the following property
+	\[ \Phi(\rho) = \sum p_j U_j \rho U_j^\dagger,\qquad \sum p_j = 1 \]
+	Qubit unital channels are convex combinations of unitary transformations. Not true if $d\ge 3$.
+	
+	Recall that we can represent qubit states as vectors inside the Bloch sphere, that is
+	\[ \rho = \dfrac{1+\vec{a}\cdot\vec{\sigma}}{2} \]
+	where $|\vec{a}|\le 1$. LCPT maps are from $\rho$ to $\rho'$ or equivalently from $\vec{a}$ to $\vec{a'}$.
+	Let us determine $\vec{a'}$ as a function of $\vec{a}$. We abuse notation and write $\Phi(\vec{a})$.
+	
+	It is straightforward to see that $\Phi(\vec{a})$ must be a linear map, due to linearity of $\Phi$.
+	\[ a'_i = T_{ij} a_j + b_i \]
+	The trace preserving property is trivial. $\vec{b}$ is the Bloch vector of $\Phi\left(\dfrac{1_S}{2}\right)$. If $\Phi$ is unital, then trivially $\vec{b} = 0$.
+	
+	Complete positivity leads to further constraints.%TODO andrebbero nella lezione dopo, ma è più coerente metterli qui!
+	
+	\subsubsection{Entanglement breaking channels}
+	A channel $\Phi$ on S is entanglement breaking if, for all ancillas A and initial states $\rho_{SA}$
+	\[ (\Phi\otimes 1_A)(\rho_{SA}) = \rho'_{SA} \]
+	where $\rho'_{SA}$ is $\mathbf{separable}$. Physically, local noise is capable of destroying all entanglement in the whole system.
+	
+	The set of all entanglement breaking channels is closed under convex combinations.
+	
+	Let $\Phi$ be entanglement breaking and $\Phi'$ any channel. Then both $\Phi'\circ \Phi$ and $\Phi\circ \Phi'$ are entanglement breaking. Proof: $\Phi\circ \Phi'$ is trivial; $\Phi'\circ \Phi$ relies on the observation that if you start with no entanglement, local operations cannot create any.
+	
+	\subsubsection{Shor-Ruskai-Horodecky theorem}
+	Any entanglement breaking quantum channel can be effectively described as a crypto-classical channel
+	\begin{equation}
+	\label{eq:6}
+	\Phi(\rho) = \sum_j \rho_j \Tr\left[ E_j \rho \right]
+	\end{equation}
+	that is, a classical measurement on $\rho$ whose outcome $j$ is used only to determine which $\rho_j$ to prepare, and then $j$ is voided. Stated more precisely, $\Phi$ is entanglement breaking iff there are $E_j$ POVM, $\rho_j$ states s.t. \ref{eq:6} holds. Proof:
+	
+	We first prove that such a $\Phi$ is entanglement breaking.
+	\[ \rho_{SA} \rightarrow \sum_j \Tr_S\left[ E_j \rho_{SA} \right] \otimes \rho_j \]
+	where $E_j$ acts on S and $\rho_j$ are states of S. Define
+	\[ \tilde{\tau}_j = \Tr_S\left[ E_j \rho_{SA} \right] \]
+	It is easy to see that $\tilde{\tau}_j\ge 0$ (mine. check!):
+	\[ \braket{\psi|\tilde{\tau}_j|\psi} = \Tr\left[ (E_j\otimes \ket{\psi}\bra{\psi}) \rho_{SA} \right] \ge 0 \]
+	where the last inequality comes from observing that that is the probability of finding $\rho_{SA}$ in state $\ket{\psi}_A$ and output $j$ on S in a joint measurement of the two systems. Also
+	\[ \Tr_A\left[ \tilde{\tau}_j \right] = \Tr_{SA} \left[ E_j \rho_{SA} \right] = \Tr_S\left[ E_j \rho_S \right] \equiv p_j,\qquad \rho_S = \Tr_A\left[\rho_{SA}\right],\quad \sum_j p_j = 1 \]
+	
+	Then
+	\[ \rho_{SA} \rightarrow \sum_j \tilde{\tau}_j \otimes \rho_j = \sum_j p_j \dfrac{\tilde{\tau}_j}{p_j} \otimes \rho_j \]
+	Observing that $\tau_j = \dfrac{\tilde{\tau}_j}{p_j}$ are density matrices we conclude that the final state is separable, hence $\Phi$ is entanglement breaking.
+	\vspace{2mm}
+	
+	We now prove the converse. Given $\Phi$ entanglement breaking, construct $\rho_{CJ}^\Phi$. By definition of CJ state and entanglement breaking
+	\[ \rho_{CJ}^\Phi = (\Phi\otimes 1_A)(\ket{\psi_M}\bra{\psi_M}) = \sum_j p_j\, \rho_j^S\otimes \sigma_j^A \]
+	but now we can reconstruct the action of $\Phi$ via the CJ isomorphism
+	\[ \Phi(\rho_S) = d \Tr_A\left[ \rho_{CJ}^\Phi (1_S\otimes \rho_A^t) \right] = \sum_j p_j\,d\,\Tr_A\left[ \sigma_j^A \rho_A^t \right] \rho_j^S = \sum_j \Tr\left[ p_j\,d\, \sigma_j^t \rho \right] \rho_j^S \]
+	All that is left to prove is that $E_j = d\,p_j\,\sigma_j^t$ are a POVM set. They are completely positive (trivially) and
+	\[ d\sum_j p_j\,\sigma_j = d \Tr_S\left[ \rho_{CJ}^\Phi \right] = 1_A \]
+	where we used \ref{eq:7} in the last step.
+	
+	
 	
 \end{document}
