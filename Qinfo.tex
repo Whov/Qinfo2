@@ -70,7 +70,7 @@
 	We know we can purify a state by adding extra degrees of freedom. Suppose we purify the state of the environment $\tau_E(0)$ by adding a system $E_1$, $E' = E+E_1$. Then $\tau_E(0) = \Tr_{E_1} \left(\ket{0}_{E'}\bra{0}\right) $. Then, defining $U'_{SE'} = U_{SE} \otimes 1_{E'}$, we get (simple check)
 	\[ \Phi\left[\hat{\Theta}\right] = \Tr_{E'} \left[ U'_{SE'} \left( \hat{\Theta} \otimes \ket{0}_{E'}\bra{0} \right) {U'}^\dagger_{SE'} \right] \]
 	
-	We have thus proved that the stinespring representation is not only a special case of physical representation, but equivalent to it. They are both \emph{extrinsic} representations.
+	We have thus proved that the Stinespring representation is not only a special case of physical representation, but equivalent to it. They are both \emph{extrinsic} representations.
 	
 	\subsubsection{Kraus representation}
 	Kraus representation is \emph{intrinsic}, no environment needed. It is defined in terms of a Kraus set $M_k\in \mathcal{L}(\HH_S)$.
@@ -100,7 +100,7 @@
 	is completely positive. Complete positivity implies positivity, but not vice-versa. %GIVE EXAMPLE
 	This stronger requirement is necessary when we remember that we can always view any system $S$ as part of a larger system $S+A$, where $A$ maybe is far away and irrelevant.
 	
-	It is easy to show that all representations fulfill these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
+	It is easy to show that all representations fulfil these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
 	
 	\subsection{Choi-Jamiolkowski construction}
 	Given $\Phi$ acting on $S$, we construct an ancilla $A$ with the same dimensionality $d$ (assumed finite, but extensions do exist).
@@ -117,7 +117,7 @@
 	\end{equation}
 	We immediately see the equivalence when $\rho_S$ is pure (note that $\rho_A^t=\rho_A^*$ due to hermiticity. Note the dependence on the basis chosen to define $\rho_{CJ}$); the extension to generic density matrix $\rho_S$ follows from linearity.
 	
-	To sum up, $\rho_{CJ}^\Phi$ containts all the information on $\Phi$.
+	To sum up, $\rho_{CJ}^\Phi$ contains all the information on $\Phi$.
 	
 	\subsubsection{From axiomatic to Kraus representation}
 	Given $\Phi$, construct the Choi state $\rho_{CJ}^\Phi$ and put it in spectral form
@@ -155,7 +155,7 @@
 		\item We can appropriately choose $d^2$ states $\{\rho_j\}$, let $\Phi$ act on each and do state tomography. Notice that if we need $n$ copies of a state to determine it with the prescribed accuracy, then $n*d^2$ state preparations (and measurements) will be required.
 		\item We can be clever and exploit the Choi state. First, notice that you can prepare it experimentally: you attach an ancilla $A$ to $S$, prepare $\ket{\psi_M}_{SA}$ and let $\Phi$ act on $S$. Then, doing state tomography $n$ times, you determine $\rho_{CJ}^\Phi$ and therefore $\Phi$.
 	\end{enumerate}
-	The speedup of the second method relies on our ability to construct a maximally entangled state. This is a first instance of \emph{entanglement as a resource}.
+	The speed-up of the second method relies on our ability to construct a maximally entangled state. This is a first instance of \emph{entanglement as a resource}.
 	
 	\subsection{Distances on the set of quantum channels}
 	We begin with a few remarks on the set $\mathcal{C}(\HH_S)$ of quantum channels on $S$.
@@ -183,7 +183,7 @@
 	\[ D_\diamond (\Phi_1, \Phi_2) \ge d_1\left(\rho_{CJ}^{\Phi_1},\,\, \rho_{CJ}^{\Phi_2}\right) \]
 	
 	\subsubsection{Choi state peculiarity}
-	The Choi-Jamiolkowski construction is often dubbed "isomorphism" but, as we will now see, the Choi state $\rho_{CJ}$ possesses some nontrivial properties. Taking the trace over $S$ and making various trivial substitutions results in
+	The Choi-Jamiolkowski construction is often dubbed "isomorphism" but, as we will now see, the Choi state $\rho_{CJ}$ possesses some non-trivial properties. Taking the trace over $S$ and making various trivial substitutions results in
 	\[ \Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_{j,k=1} \Tr\left[\Phi(\ket{j}_S\bra{k})\right] \ket{j}_A\bra{k} \]
 	exploiting the trace preserving property of $\Phi$ we get
 	\begin{equation}
@@ -204,7 +204,7 @@
 	
 	$\Phi_H$ is called the adjoint channel, because remembering that $\braket{A|B} = \Tr\left[A^\dagger B\right]$ is a scalar product, we get
 	\[ \braket{A|\Phi(B)} = \braket{\Phi_H(A)|B} \]
-	It is a linear, completely positive superoperator, but it is \textbf{not} trace preserving.
+	It is a linear, completely positive super-operator, but it is \textbf{not} trace preserving.
 	\[ 1 = \sum M_k^\dagger M_k \neq \sum M_k M_k^\dagger \]
 	\noindent Indeed this property is replaced by $\Phi_H(1) = 1$, which is easily verified and goes under the name of \emph{unital property}.
 	\vspace{3mm}
@@ -241,7 +241,7 @@
 	
 	\paragraph{Example} $\Phi(\rho) = \bar{\rho}$. Turn this into a well defined quantum channel (remember the domain is $\mathcal{L}(\HH_S)$, not $\sigma(\HH_S)$), prove LCPT and show that it is anti-degradable.
 	
-	\emph{Solution} We begin by defining $\Phi(\theta) = \Tr[\theta] \bar{\rho}$. It reduces to the right $\Phi$ on density matrices and it is trace preserving by definition. Linearity being obvious, we are left with complete positivity. Instead of proving it, we take a different route. We can exhibit a Stinespring representation of $\Phi$, that is a unitary $U_{SE}$ s.t., tracing out $E$, $\rho\rightarrow \bar{\rho}$. Then we know that a superoperator $\Phi$ given in Stinespring representation is LCPT.
+	\emph{Solution} We begin by defining $\Phi(\theta) = \Tr[\theta] \bar{\rho}$. It reduces to the right $\Phi$ on density matrices and it is trace preserving by definition. Linearity being obvious, we are left with complete positivity. Instead of proving it, we take a different route. We can exhibit a Stinespring representation of $\Phi$, that is a unitary $U_{SE}$ s.t., tracing out $E$, $\rho\rightarrow \bar{\rho}$. Then we know that a super-operator $\Phi$ given in Stinespring representation is LCPT.
 	
 	Write $\bar{\rho} = \sum_{k=1}^{d} \lambda_k \ket{k}_S\bra{k}$, $\lambda_k\ge 0$, $\braket{j|k} = \delta_{jk}$ a basis. We will define $d$ unitary matrices in a moment, but for now let us call them $V_i$. We define $U_{SE}$ on $\ket{k}_S\ket{0}_E$ as
 	\[ U_{SE} (\ket{i}_S\ket{0}_E) = \sum_{k=1}^{d} \sqrt{\lambda_k} \ket{k}_S \otimes (V_i\ket{k}_E) \]
@@ -293,20 +293,20 @@
 	
 	$\forall\, \lambda\in Sp(\Phi)$, $|\lambda|\le 1$. This comes from the contractivity of $\Phi$.
 	
-	$\forall\,\Phi$ $\lambda=1$ is in the spectrum, that is $\Phi(\theta)=\theta$ always admits a nonzero solution. I attempt a proof (not checked!): either $\Phi$ is not strictly contractive, then it is unitary and any eigenvector evolves with a phase, that is the state is invariant; or $\Phi$ is contractive, then Banach-Caccioppoli theorem guarantees the existence of a fixed point.
+	$\forall\,\Phi$ $\lambda=1$ is in the spectrum, that is $\Phi(\theta)=\theta$ always admits a non-zero solution. I attempt a proof (not checked!): either $\Phi$ is not strictly contractive, then it is unitary and any eigenvector evolves with a phase, that is the state is invariant; or $\Phi$ is contractive, then Banach-Caccioppoli theorem guarantees the existence of a fixed point.
 	
 	\subsection{Ergodic channels}
 	Consider a channel $\Phi$ and call $\Phi^2\equiv \Phi\circ\Phi$, $\Phi^3\equiv\dots$ We can imagine a system initialized in a state $\rho$ which evolves in time and becomes $\Phi(\rho),\Phi^2(\rho)\dots$ Consider the sequence
 	\[ \sigma_n = \dfrac{\rho + \Phi(\rho) \dots +\Phi^n(\rho)}{n+1} \]
-	of the averages. If it converges to some $\rho_0$ $\bf{independent}$ of $\rho$, then the channel is called \emph{ergodic}. A channel is ergodic iff $\lambda=1$ is nondegenerate (if degenerate, the sequence converges to $\theta_1$ or $\theta_2$ depending on the input).
+	of the averages. If it converges to some $\rho_0$ $\bf{independent}$ of $\rho$, then the channel is called \emph{ergodic}. A channel is ergodic iff $\lambda=1$ is non-degenerate (if degenerate, the sequence converges to $\theta_1$ or $\theta_2$ depending on the input).
 	
 	\subsection{Mixing channels}
 	Analogously, $\Phi$ is \emph{mixing} if $\Phi^n(\rho)$ converges to some $\bar{\rho}$ independent of $\rho$. Due to Cesaro summation theorem, mixing implies ergodic; the converse is not true. The set of mixing channels is dense in the set of all channels; actually the space of all channels is convex, and the whole bulk is mixing.
 	
 	\subsection{Liouville space representation}
-	We now want to write down matrices for our superoperators. In order to do so, we need a way to write operators (on $\HH$) as vectors. To this end, we introduce the notation $\kett{\theta}$.
+	We now want to write down matrices for our super-operators In order to do so, we need a way to write operators (on $\HH$) as vectors. To this end, we introduce the notation $\kett{\theta}$.
 	\[ \theta = \sum \braket{i|\theta|j} \ket{i}\bra{j},\qquad \kett{\theta} = \sum \braket{i|\theta|j} \ket{i}\ket{j} \]
-	What we did was actually introducing a noncanonical isomorphism $\HH\rightarrow \HH^*$ thru which we mapped $\HH^*\otimes \HH$ to $\HH^{\otimes 2}$. We give some examples.
+	What we did was actually introducing a non-canonical isomorphism $\HH\rightarrow \HH^*$ through which we mapped $\HH^*\otimes \HH$ to $\HH^{\otimes 2}$. We give some examples.
 	\[ 1 \rightarrow \kett{1} = \sum_{i=1}^d \ket{i}\ket{i} \]
 	which is a maximally entangled not-normalized state. It is a simple calculation to show that
 	\begin{equation}
@@ -378,7 +378,8 @@
 	\[ a'_i = T_{ij} a_j + b_i \]
 	The trace preserving property is trivial. $\vec{b}$ is the Bloch vector of $\Phi\left(\dfrac{1_S}{2}\right)$. If $\Phi$ is unital, then trivially $\vec{b} = 0$.
 	
-	Complete positivity leads to further constraints.%TODO andrebbero nella lezione dopo, ma è più coerente metterli qui!
+	Complete positivity leads to further constraints, which we will discuss at the beginning of next lecture.
+	
 	
 	\subsubsection{Entanglement breaking channels}
 	A channel $\Phi$ on S is entanglement breaking if, for all ancillas A and initial states $\rho_{SA}$
@@ -418,6 +419,106 @@
 	All that is left to prove is that $E_j = d\,p_j\,\sigma_j^t$ are a POVM set. They are completely positive (trivially) and
 	\[ d\sum_j p_j\,\sigma_j = d \Tr_S\left[ \rho_{CJ}^\Phi \right] = 1_A \]
 	where we used \ref{eq:7} in the last step.
+	
+	
+	\section{Lecture 5}
+	\subsection{Qubit channels constraints}
+	We return to qubit channels $\Phi$, where
+	\[ \vec{a'} = T\vec{a}+\vec{b} \]
+	and we want to constrain $T$ and $\vec{b}$ using complete positivity. We begin with a simpler case: $\Phi$ unitary.
+	
+	\paragraph{Unitary case} It is well known that the most general unitary 2x2 matrix is 
+	\[ U_{\vec{\theta}} = \exp^{-i\frac{\vec{\theta}\cdot\vec{\sigma}}{2}} \]
+	up to an irrelevant phase. It can be shown that
+	\[ U_{\vec{\theta}} \sigma_i U_{\vec{\theta}}^\dagger = R_{\vec{\theta},\,ij} \sigma_j \]
+	Where $R$ is a rotation matrix. Conclusion
+	\[ U_{\vec{\theta}} \left(\dfrac{1+\vec{a}\cdot\vec{\sigma}}{2}\right) U_{\vec{\theta}}^\dagger = \dfrac{1+R^{-1}_{\vec{\theta},\,ij} a_j \sigma_i}{2}, \qquad a'_i\rightarrow R^{-1}_{\vec{\theta},\,ij} a_j \]
+	where we used the invariance of the scalar product under rotation $R^{-1}$ of both terms.
+	\vspace{5mm}
+	
+	We now exploit unitary equivalence to bring the transformation in a canonical form. Consider $\Phi_1$ unitary equivalent to $\Phi_2$. Let $\Phi_2$ be associated with $T$, $\vec{b}$. Then there are $U,V$ unitaries s.t.
+	\begin{equation}
+	\label{eq:8}
+	\Phi_1(\rho) = U \Phi_2(V\rho V^\dagger) U^\dagger
+	\end{equation}
+	Let the action of $V$ be associated with a rotation matrix $R_1$; $U$ with $R_2$. Then, proceeding as in the unitary case, \ref{eq:8} becomes
+	\[ a'_{\Phi_1(\rho)} = R_2^{-1} \left( T(R_1^{-1} \vec{a}) + \vec{b} \right) = (R_2^{-1}\circ T\circ R_1^{-1}) \vec{a} + R_2^{-1} \vec{b} \]
+	Therefore, in the new basis, we have
+	\[ T' = (R_2^{-1}\circ T\circ R_1^{-1}),\qquad \vec{b}' = R_2^{-1} \vec{b} \]
+	We can always choose (singular value decomposition) $R_1$ and $R_2$ s.t. $T'$ is diagonal
+	\[ T' = \begin{pmatrix}
+	\lambda_1 & 0 & 0 \\
+	0 & \lambda_2 & 0 \\
+	0 & 0 & \lambda_3 \\
+	\end{pmatrix} \]
+	with $\lambda_i$ singular eigenvalues, all $\lambda_i \ge 0$. Any channel is therefore described by six parameters:
+	$\lambda_i$ and $\vec{b}$.
+	
+	
+	We state one last result without proof: for $\Phi$ unital ($\vec{b}=0$) the set of allowed $T$ is described by a tetrahedron (interior included) in $\mathbb{R}^3$, where points have coordinates ($\lambda_1,\lambda_2,\lambda_3$). The vertices on the tetrahedron are
+	\[ (1,-1,-1)\quad (-1,1,-1)\quad (-1,-1,1)\quad (1,1,1) \]
+	All points inside this tetrahedron correspond to LCPT unital quantum channels, all points outside are not completely positive unital maps.
+	
+	\paragraph{Exercise: amplitude damping} As an exercise, we find $T$ and $\vec{b}$ for an amplitude damping channel.
+	%TODOTODOTODO!
+	
+	\subsection{Gaussian bosonic channels}
+	Bosonic channels are typically applied to the electromagnetic field. As such, we need to recall some basic facts about infinite dimensional Hilbert spaces.
+	\subsection{Infinite dimensional $\HH$}
+	$\HH$ must be separable, that is it must admit a $\mathbf{countably}$ infinite complete set of linearly independent vectors.
+	Not all operators on $\HH$ are equally regular: a famous example of the nonsense you get when you're too cavalier about this is
+	\[ \Tr\left[ xp - px \right] = \Tr\left[ i\hbar 1_S \right] \rightarrow 0 = i\hbar\infty?! \]
+	We identify the set $\mathcal{B}(\HH) \subset \mathcal{L}(\HH)$ of \emph{bounded} linear operators. These operators have finite norm and are continuous. Further, we identify $\mathcal{B}_1(\HH) \subset \mathcal{B}(\HH)$ the set of \emph{trace class} operators, for which there is a well-behaved notion of trace. The operators are of central interest to us because density matrices are trace 1.
+	
+	The action of any channel $\Phi$ (and $\Phi_H$) can be extended from $\sigma(\HH)$ to $\mathcal{B}_1(\HH)$, but no further.
+	
+	\subsection{Harmonic oscillator}
+	\emph{Theoretical physics is defined as a sequence of courses each of which deals with the harmonic oscillator. -Sidney Coleman}
+	We skip the very basics (introduction of $x,p,H,a,a^\dagger$ operators) and just to displacement operators.
+	\subsubsection{Displacement operators}
+	\[ D(\mu) = \exp^{\mu a^\dagger - \mu^* a} \]
+	is a unitary transformation for all $\mu \in \mathbb{C}$. Suppose that the state $\rho$ corresponds to the distribution $f$ in Wigner phase space. Then $D(\mu)$ acts as a rigid displacement
+	\[ \rho' = D(\mu) \rho D(\mu)^\dagger \rightarrow f'(x,p) = f(x-\Re(\mu), p-\Im(\mu)) \]
+	As a consequence $\braket{x}_{\rho'} = \braket{x}_\rho + \Re(\mu)$, $\braket{p}_{\rho'} = \braket{p}_\rho + \Im(\mu)$.
+	
+	\subsubsection{Characteristic function} We now introduce the characteristic function $\chi_\rho(\mu)$ of a state $\rho$ as
+	\[ \rho = \int \dd^2\mu D(-\mu) \chi_\rho(\mu),\qquad \chi_\rho(\mu) = \Tr\left[D(\mu)\rho\right] \]
+	$\chi_\rho(\mu)$ is a complex function of a complex variable and they are in one-to-one correspondence with density matrices.
+	
+	\subsection{Gaussian states} A state $\rho$ is said to be gaussian when $\chi_\rho(\mu)$ is a gaussian function, that is
+	\[ \chi_\rho(\mu) = \exp^{-A|\mu-\mu_0|^2},\quad A> 0 \]
+	The Wigner distribution will also be a gaussian function in phase space.
+	
+	Proposition: $\rho$ is gaussian iff it is a Gibbs state on a quadratic hamiltonian.
+	
+	\noindent We remind the reader that a Gibbs state is a thermal state
+	\[ \rho = \dfrac{e^{-\beta H}}{Z},\qquad Z = \Tr\left[ e^{-\beta H} \right] \]
+	As an example, consider a harmonic oscillator with operators $a,a^\dagger$. A Gibbs state would be $\rho_\beta = \dfrac{e^{-\beta\hbar\omega a^\dagger a}}{Z(\beta)}$.
+	
+	The set of gaussian states is a $\mathbf{non}$-$\mathbf{convex}$ subset of $\sigma(\HH)$. Although mathematically unpleasing, these states are the most common ones we deal with in the lab (especially in quantum optics): laser beams, squeezed laser beams, attenuated or thermalized signals,\dots are all described by gaussian states.
+	
+	\subsection{Gaussian channels}
+	A gaussian channel is any quantum channel with the constraint that gaussian states must be mapped to gaussian states. There is no constraint on the image of non-gaussian states.
+	
+	Any realistic noise acting on EM field naturally appearing in the lab is going to be represented by the action of a gaussian channel.
+	
+	\paragraph{Example: lossy gaussian channel} We describe the action of the channel on $\chi$ instead of $\rho$.
+	Let us focus on one single mode on the EM field.
+	\[ \chi_{_{\Phi(\rho)}}(\mu) \equiv \Tr\left[ D(\mu) \Phi(\rho) \right] = \chi(\sqrt{\eta}\mu) \exp\left[-(1-\eta) \frac{|\mu|^2}{2} \right] \]
+	where $\eta\in[0,1]$ is a characteristic parameter of the channel $\Phi$. $\eta=1$ means no loss; $\eta=0$ means complete loss of information and energy.
+	
+	\subsubsection{Beam splitter}
+	Beam splitters \ref{fig:bs} are a very common piece of apparatus routinely used in quantum optics experiments.
+	They are the perfect place to start if we want to put our new definitions in practice. We will now realize a lossy gaussian channel $\Phi$ with a beam splitter.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{BS}
+		\caption{Beam splitter}
+		\label{fig:bs}
+	\end{figure}
+	We focus our attention on one single frequency $\omega$. We send in a signal from the left onto the beam splitter (B.S.). A fraction $\eta$ (called \emph{transmission coefficient}) of the energy is transmitted; a fraction $1-\eta$ is reflected down. The environment plays an active role even if it is in the vacuum state $\ket{0}_E$. Indeed the action of the beam splitter can be described by some unitary s.t.
+	\[ \Phi(\rho) = \Tr_E\left[U (\rho\otimes \ket{0}_E\bra{0}) U^\dagger \right] \]
 	
 	
 	
