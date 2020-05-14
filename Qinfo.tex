@@ -476,7 +476,10 @@
 	\emph{Theoretical physics is defined as a sequence of courses each of which deals with the harmonic oscillator. -Sidney Coleman}
 	We skip the very basics (introduction of $x,p,H,a,a^\dagger$ operators) and just to displacement operators.
 	\subsubsection{Displacement operators}
-	\[ D(\mu) = \exp^{\mu a^\dagger - \mu^* a} \]
+	\label{subsub:disp.op.}
+	\[ D(\mu) = \exp^{\frac{\mu a^\dagger - \mu^* a}{\sqrt{2}}} \]
+	CAVEAT: I'M NOT SURE ABOUT $\sqrt{2}$
+	
 	is a unitary transformation for all $\mu \in \mathbb{C}$. Suppose that the state $\rho$ corresponds to the distribution $f$ in Wigner phase space. Then $D(\mu)$ acts as a rigid displacement
 	\[ \rho' = D(\mu) \rho D(\mu)^\dagger \rightarrow f'(x,p) = f(x-\Re(\mu), p-\Im(\mu)) \]
 	As a consequence $\braket{x}_{\rho'} = \braket{x}_\rho + \Re(\mu)$, $\braket{p}_{\rho'} = \braket{p}_\rho + \Im(\mu)$.
@@ -502,7 +505,7 @@
 	
 	Any realistic noise acting on EM field naturally appearing in the lab is going to be represented by the action of a gaussian channel.
 	
-	\paragraph{Example: lossy gaussian channel} We describe the action of the channel on $\chi$ instead of $\rho$.
+	\subsubsection{Lossy gaussian channel} We describe the action of the channel on $\chi$ instead of $\rho$.
 	Let us focus on one single mode on the EM field.
 	\[ \chi_{_{\Phi(\rho)}}(\mu) \equiv \Tr\left[ D(\mu) \Phi(\rho) \right] = \chi(\sqrt{\eta}\mu) \exp\left[-(1-\eta) \frac{|\mu|^2}{2} \right] \]
 	where $\eta\in[0,1]$ is a characteristic parameter of the channel $\Phi$. $\eta=1$ means no loss; $\eta=0$ means complete loss of information and energy.
@@ -520,6 +523,127 @@
 	We focus our attention on one single frequency $\omega$. We send in a signal from the left onto the beam splitter (B.S.). A fraction $\eta$ (called \emph{transmission coefficient}) of the energy is transmitted; a fraction $1-\eta$ is reflected down. The environment plays an active role even if it is in the vacuum state $\ket{0}_E$. Indeed the action of the beam splitter can be described by some unitary s.t.
 	\[ \Phi(\rho) = \Tr_E\left[U (\rho\otimes \ket{0}_E\bra{0}) U^\dagger \right] \]
 	
+	\section{Lecture 6}
+	\subsubsection{Thermal channel}
+	This is another example of a sigle mode bosonic gaussian map. It is defined as
+	\[ \chi_{\rho'}(\mu) = \chi(\sqrt{\eta}\mu) \exp^{-(1-\eta)(N+\frac{1}{2}) |\mu|^2} \]
+	where $\eta$ and $N$ are parameters describing the channel. $N\ge 0$ is related to the temperature of the environment by the following
+	\[ N = \dfrac{1}{e^{\beta\omega} -1} \]
+	The physical representation of the channel is described in figure \ref{fig:thermal}. The environment is in a Gibbs state of inverse temperature $\beta$. Some of the input photons are reflected out, while some of the thermal photons from the environment are reflected into the output. In the limit $\beta\rightarrow \infty$ we recover the lossy gaussian channel.
 	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{thermal}
+		\caption{}
+		\label{fig:thermal}
+	\end{figure}
+	
+	\subsection{Multi-mode extension}
+	\subsubsection{QFT recap}
+	We recall some basic quantum electrodynamics. The (operator) vector potential $A$ can be decomposed in annihilation and creation operators. The field decomposes in an infinite set of quantum harmonic oscillators. We neglect polarization for simplicity and put the system in a box.
+	\[ A(x,t) = \sum_p \dfrac{1}{\sqrt{2\omega_p}} (a_p e^{-ipx} + a_p^\dagger e^{ipx}) \]
+	\[ [a_p, a_q^\dagger] = \delta_{p,q} \]
+	
+	\subsubsection{Symplectic group}
+	Given that the electromagnetic degrees of freedom can be represented as $n$ ($n$ is actually infinite) harmonic oscillators, we introduce
+	$q^1,p_1,q^2,p_2,\dots,q^n,p_n$ and
+	\[ \vec{R} = (q^1,q^2,\dots,q^n;p_1,p_2,\dots,p_n) \]
+	which can be used to summarize the commutation relations as
+	\[ [R_i, R_j] = i (\sigma_{2n})_{ij} \]
+	\[ \sigma_{2n} = \begin{pmatrix}
+	0 & 1_{n _xn} \\
+	-1_{n _xn} & 0 \\
+	\end{pmatrix} \]
+	where $\sigma_{2n}$ is the \emph{commutation matrix} of the model. We give some properties of $\sigma_{2n}$
+	\[ \det \sigma_{2n} = 1,\qquad \sigma_{2n}^t = \sigma_{2n}^{-1} = -\sigma_{2n} \]
+	\vspace{2mm}
+	
+	\noindent The matrix transformations which preserve $\sigma_{2n}$ are called \emph{symplectic}:
+	\[ S\sigma_{2n} S^t = \sigma_{2n} \]
+	and they form the \emph{symplectic group}. It is easy verified that $S=1$ is symplectic and that if $S$ is symplectic then $S^{-1}$ is as well. Taking the inverse, we also prove that $S^t$ is symplectic.
+	\[ \sigma_{2n} = S\sigma_{2n}S^t \rightarrow \sigma_{2n}^{-1} = S^{-1t}\sigma_{2n}^{-1} S^{-1} \rightarrow \sigma_{2n} = T^t \sigma_{2n} T,\quad T = S^{-1} \]
+	where $T$ is any symplectic matrix, because $S^{-1}$ is.
+	
+	\subsubsection{Weyl displacement operator}
+	Consider a list of $2n$ real parameters
+	\[ \vec{z} = (x_1,x_2,\dots,x_n;y^1,y^2,\dots,y^n) \]
+	We can associate to any $z$ a \emph{Weyl displacement operator}
+	\[ V(z) = e^{i\vec{R}\cdot \vec{z}} \]
+	Noting that $\vec{R}_i$ is hermitean and that $\vec{z}_i$ is real, we deduce that $V(z)$ is a unitary operator. It can be viewed as a linear combination of creation and annihilation operators, much like $A$.
+	
+	\noindent If $n=1$ then we are considering a single mode and we are back to \nameref{subsub:disp.op.}. Constructions performed with single mode displacement operators generalize to the multi-mode case.
+	
+	\subsubsection{Metaplectic representation and trivial generalizations}
+	
+	\paragraph{Theorem}
+	Suppose $U$ unitary is a canonical transformation, meaning $U R_j U^\dagger = M_{jj'} R_{j'}$, $M$ invertible.
+	The action of $U$ preserves the commutation relations
+	\[ [UR_iU^\dagger, UR_jU^\dagger] = U [R_i, R_j] U^\dagger = i U (\sigma_{2n})_{ij} U^\dagger = i (\sigma_{2n})_{ij} \]
+	and defines an action on $V(z)$. Moreover
+	\[ UV(z)U^\dagger = e^{i (UR_jU^\dagger) z_j} = e^{i z_j M_{jj'} R_{j'}} = e^{i z'_{j'} R_{j'}}=V(z'),\quad z'_{j} = M^t_{jj'} z_{j'} \]
+	
+	(Metaplectic stuff..?). We can go the other way: given a transformation $z\rightarrow z'=Mz$ (M invertible) we can interpret it as arising from a canonical transformation.
+	
+	\paragraph{Characteristic function (again)}
+	The multidimensional characteristic function is defined as
+	\[ \chi_\rho(z) = \Tr\left[ \rho V(z) \right] \]
+	\[ \rho = \int \dfrac{\dd^{2n} z}{(2\pi)^n} V(z) \chi_\rho(z) \]
+	CAVEAT: $(2\pi)^n$ or $(2\pi)^{2n}$?
+	\paragraph{Gaussian state}
+	$\rho$ is gaussian if $\chi(z)$ is gaussian in its $2n$ real parameters. We can always write
+	\[ \chi(z) = \exp\left[ -\frac{1}{4} z^t \gamma z - i\vec{m}\cdot\vec{z} \right] \]
+	where $\gamma$ is positive semidefinite. It can be shown that the displacement vector $m$ is given by
+	\[ \vec{m} = \Tr[\rho \vec{R}] \]
+	while the covariance matrix $\gamma$ is
+	\[ \gamma = \Tr\left[ \rho \{R_j-m_j\,1, R_{j'}-m_{j'}\,1\} \right],\quad {A,B} \equiv AB+BA \]
+	Intuitively $\vec{m}$ is the vector of the average values of positions and momenta; $\gamma$'s diagonal elements are the variances, while the off diagonal terms are the correlations.
+	
+	From the Heisenberg uncertainty principle it can be shown that not only $\gamma\ge 0$, but also
+	\[ \gamma \ge i \sigma_{2n} \]
+	Finally, observe that $\gamma$ and $\vec{m}$ can be defined for any state, but gaussian states are $\mathbf{uniquely}$ identified by their $\gamma$ and $\vec{m}$. Indeed, given $\gamma \ge i \sigma_{2n}$ and $\vec{m}$ there is a unique gaussian state.
+	
+	\subsubsection{Williamson theorem}
+	Williamson theorem provides us with a canonical form for $\gamma$ covariance matrix (for any state, even nongaussian). The most general matrix fulfilling $\gamma\ge i \sigma{2n}$ is given by
+	\[ \gamma = S\begin{pmatrix}
+	D_{n _x n} & 0 \\
+	0 & D_{n _x n} \\
+	\end{pmatrix} S^t \]
+	where $S$ is a symplectic matrix and
+	\[ D_{n _x n} = \begin{pmatrix}
+	d_1 & 0 & \dots \\
+	0 & d_2 & \dots \\
+	\dots
+	\end{pmatrix} \]
+	that is $D$ is diagonal, and $d_k\ge 1$ are called \emph{symplectic eigenvalues}.
+	
+	It can be shown (exercise!) that $d_k$'s are the eigenvalues of $M = -\sigma_{2n} \gamma \sigma_{2n}\gamma$.
+
+	\noindent Proof: Substituting $\gamma = S\begin{pmatrix}
+	D_{n _x n} & 0 \\
+	0 & D_{n _x n} \\
+	\end{pmatrix} S^t$ in the definition of $M$ and putting $Mv = \lambda v$, $w = S^t v$, we have that the eigenvectors are $v = S^{-1t} \bar{w}$, where $\bar{w}$ is a vector in the canonical basis of $\mathbb{R}^{2n}$. The eigenvalue is $d_k^2$.
+	
+	\noindent CAVEAT: the claim looks false, and indeed M is quadratic in D, so it makes sense that applying $M$ results in factors $d^2$ (while we would like linear $d_k$).
+	
+	\paragraph{Theorem} As in the single mode case, $\rho$ is gaussian iff it is a Gibbs state of some hamiltonian quadratic in the field variables $H = \sum c_{jj'}R_jR_{j'}$.
+	
+	\paragraph{Gaussian channel}
+	The extension to the multi-mode case is trivial to define. The most general gaussian channel can be written as
+	\[ \chi_{\rho'}(z) = \chi_\rho(Xz) \exp\left[ -\frac{1}{2} z^tYz + i\vec{v} \cdot \vec{z} \right] \]
+	where $\vec{v}$ is free of constraints and $X,Y$ are matrices s.t.
+	\[ Y \ge i (\sigma_{2n} - X^t \sigma_{2n} X) \]
+	
+	\subsection{Continuous time evolution in open quantum systems}
+	Up till now we discussed the most general transformation the system can undergo in a fixed time $t$. We now turn to the problem of describing the dynamics of the system in time. This is a generalization to open quantum systems of the Schroedinger equation
+	\[ \dot{\rho}(t) = -\frac{i}{\hbar} [H, \rho(t)] \]
+	The first point is that information can flow in and out of the system and the environment, making it impossible to write down a dynamical equation involving only the degrees of freedom of the system. We will therefore specialize to special environments.
+	
+	\paragraph{Time dependent hamiltonians} As an aside, we recall that for closed systems $H$ can in general be time dependent (e.g. turn gates on and off, external fields, $H$ time independent but we go in interaction picture). In that case, Schroedinger equation still holds, but
+	$U(t)=e^{-i H t}$ is replaced by Dyson time ordered exponential
+	\[ U(t,0) = \mathcal{T}\exp\left[-\frac{i}{\hbar} \int_{0}^{t} H(t') \dd t' \right] \]
+	
+	\paragraph{Divisibility} It is obvious that
+	\[ U(t_2, t_0) = U(t_2, t_1) U(t_1, t_0)\quad \forall t_2\le t_1 \le t_0 \]
+	that is we can divide time evolution in any number of steps. This property holding for all times $t_2, t_0$ is equivalent to $U$ satisfying a linear differential equation. Because we argued that there is no linear dynamical law for generic environments, it follows that divisibility is lost in open quantum system dynamics.
 	
 \end{document}
