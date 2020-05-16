@@ -46,7 +46,7 @@
 
 	\tableofcontents
 	\clearpage
-	\section{Lecture 1}
+	\section{Lecture}
 	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes 1_E$, $1_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
 	
 	States of $S$ are density matrices $\rho_S\in\sigma(\HH_S)$.
@@ -141,7 +141,7 @@
 	\[ \Tr_S\left[\Phi\left(\ket{\psi}_S\bra{\psi}\right)\right] = 1 = \sum_\kappa \braket{\psi|M_\kappa^\dagger M_\kappa | \psi} \]
 	holds for all $\ket{\psi}$ and shows that $\sum M_\kappa^\dagger M_\kappa = 1$, implying that $\{M_\kappa\}$ is a good Kraus set. Our proof also shows that you can always do with at most $d^2$ Kraus operators, where $d$ is the dimensionality of your system $S$.
 	
-	\section{Lecture 2}
+	\section{Lecture}
 	We begin with 2 two observations.
 	\paragraph{Upper bounds}
 	We observe that unitary evolution $\rho\rightarrow U\rho U^\dagger$ is a CPT map whose Kraus set is singlet $\{U\}$, showing that $d^2$ is \emph{an upper bound} on the \emph{needed} Kraus operators.
@@ -224,7 +224,7 @@
 	Lastly, notice that if we work in physical representation instead of Stinespring then our freedom in choosing the representation is even larger.
 	We will end up with $\tilde{\Phi}_W$, $\tilde{\Phi}_W'$ ($_W$ stands for \emph{weak}) not necessarily unitary equivalent. The set of weak complementary channels originating from a given $\Phi$ is considerably harder to study, because different $\tilde{\Phi}$'s represent different physics.
 	
-	\section{Lecture 3}
+	\section{Lecture}
 	We begin with a comment on complementary channels from last lecture. Knowing $\Phi(\rho),\tilde{\Phi}(\rho)$ means knowing the two partial traces of the full system $SE$, but we are still missing correlations. Conclusion: $\Phi,\tilde{\Phi}$ contain less information than $U_{SE}$.
 	
 	\subsection{Degradability}
@@ -315,7 +315,7 @@
 	\end{equation}
 	\[ \langle\braket{\theta|\Omega}\rangle = \Tr\left[ \theta^\dagger \Omega \right] \]
 	
-	\section{Lecture 4}
+	\section{Lecture}
 	\subsection{Matrix representation for q. channels}
 	By making repeated use of identity \ref{eq:3} we deduce the ABC rule
 	\begin{equation}
@@ -421,7 +421,7 @@
 	where we used \ref{eq:7} in the last step.
 	
 	
-	\section{Lecture 5}
+	\section{Lecture}
 	\subsection{Qubit channels constraints}
 	We return to qubit channels $\Phi$, where
 	\[ \vec{a'} = T\vec{a}+\vec{b} \]
@@ -523,7 +523,7 @@
 	We focus our attention on one single frequency $\omega$. We send in a signal from the left onto the beam splitter (B.S.). A fraction $\eta$ (called \emph{transmission coefficient}) of the energy is transmitted; a fraction $1-\eta$ is reflected down. The environment plays an active role even if it is in the vacuum state $\ket{0}_E$. Indeed the action of the beam splitter can be described by some unitary s.t.
 	\[ \Phi(\rho) = \Tr_E\left[U (\rho\otimes \ket{0}_E\bra{0}) U^\dagger \right] \]
 	
-	\section{Lecture 6}
+	\section{Lecture}
 	\subsubsection{Thermal channel}
 	This is another example of a sigle mode bosonic gaussian map. It is defined as
 	\[ \chi_{\rho'}(\mu) = \chi(\sqrt{\eta}\mu) \exp^{-(1-\eta)(N+\frac{1}{2}) |\mu|^2} \]
@@ -644,6 +644,79 @@
 	
 	\paragraph{Divisibility} It is obvious that
 	\[ U(t_2, t_0) = U(t_2, t_1) U(t_1, t_0)\quad \forall t_2\le t_1 \le t_0 \]
-	that is we can divide time evolution in any number of steps. This property holding for all times $t_2, t_0$ is equivalent to $U$ satisfying a linear differential equation. Because we argued that there is no linear dynamical law for generic environments, it follows that divisibility is lost in open quantum system dynamics.
+	that is we can divide time evolution in any number of steps. This property holding for all times $t_2, t_0$ is equivalent to $U$ satisfying a linear differential equation. Because we argued that there is no linear dynamical law for generic environments, it follows that divisibility is generally lost in open quantum system dynamics.
+	
+	\section{Lecture}
+	\subsection{Divisibility}
+	\subsubsection{Connecting channel}
+	Let's go back to the question of divisibility for a family of channels $\{\Phi(0\rightarrow t)\}_t$. We want to know if, given two elements of the family, there is a LCPT \emph{connecting} channel $\Lambda$ s.t.
+	\[ \Phi(0\rightarrow t) = \Lambda(t'\rightarrow t) \circ \Phi(0\rightarrow t') \]
+	
+	\subsubsection{Factorizable case}
+	We work in physical representation and introduce the superoperator $\mathcal{U}$ as a shorthand notation for time evolution
+	\[ \mathcal{U}(0\rightarrow t) (\theta) = U_{SE}(0\rightarrow t)\, \theta\, U_{SE}^\dagger(0\rightarrow t) \]
+	Assume that at time $t'$ the state of the system+environment can be written as
+	\[ \mathcal{U}(0\rightarrow t')(\rho_S(0)\otimes \tau_E(0)) = \rho_S(t')\otimes \tau_E(t') \]
+	Then
+	\[ \Phi(0\rightarrow t')(\rho_S(0)) = \rho_S(t') \]
+	If $\tau_E(t')$ does not depend on $\rho_S(0)$ then we can write down a $\Lambda$ connecting channel as
+	\[ \Lambda(t'\rightarrow t)(\theta) = \Tr_E\left[ \mathcal{U}(t'\rightarrow t) (\theta\otimes \tau_E(t')) \right] \]
+	$\Lambda$ is LCPT because we are exhibiting a physical representation for it. In general, though, the state at time $t'$ will not factorize, so our construction is not very applicable.
+	
+	\subsubsection{General proof of non-divisibility (sketch)}
+	We are looking for $\Lambda$ s.t.
+	\[ \Phi(0\rightarrow t) = \Lambda(t'\rightarrow t) \circ \Phi(0\rightarrow t') \]
+	Remembering that non-maximal rank matrices are a set of measure zero, that is any map is arbitrarily close to an invertible map, we can write a formal inverse of $\Phi$ and define $\Lambda$ as
+	\[ \Lambda(t'\rightarrow t) = \Phi(0\rightarrow t) \circ \Phi^{-1}(0\rightarrow t') \]
+	where $\Phi^{-1}$ will not in general be LCPT, but simply the mathematical inverse.
+	
+	We immediately see that $\Lambda$ is linear and trace preserving, but we claim that almost always it will not be completely positive.
+	To check that we may consider the Choi isomorphism and check if the Choi operator $\theta_{CJ}^\Lambda$ is positive semidefinite
+	\[ (\Lambda(t'\rightarrow t)\otimes 1_A) (\ket{\psi_M}\bra{\psi_M}) = \theta_{CJ}^\Lambda \ge 0 \]
+	(we remind the reader that $\Lambda$ is LCPT \emph{iff} $\theta_{CJ}^\Lambda \ge 0$). We won't show this, but claim that this almost never happens.
+	
+	\subsection{Recovering divisibility}
+	We now describe a seemingly special kind of environment which is actually quite common and interesting. We describe the approximations we make along the way.
+	\subsubsection{Structured environment}
+	Assume that the environment is separable into a \emph{local environment} and a \emph{distant environment}. The system is coupled to the local environment, which in turn interacts with the (much larger) distant environment.
+	
+	The interaction of local and distant environment has the net effect of resetting the state of the local environment into a given state $\tau_{E_L}$ (imagine that the distant environment is a thermal bath resetting the local environment into a Gibbs state of specified temperature).
+	
+	Suppose further that all our measurements are coarse-grained, meaning that they last for some characteristic time $\tau$ longer that the typical time scale of the interaction of local and distant environment. We then measure the averaged density matrix $\frac{1}{\tau} \int_{t}^{t+\tau} \rho(t')\,\dd t'$. Under these assumptions divisibility is effectively recovered. This is not a proof, that will come next time.
+	
+	\subsection{Divisibility criteria}
+	We begin by defining precisely what we mean by divisibility
+	\paragraph{Def: divisibility} A family $\{\Phi(0\rightarrow t)\}_t$ is said to be divisible if $\forall\,t, t'\le t$ there is $\Lambda(t'\rightarrow t)$ connecting channel LCPT s.t. $\Phi(0\rightarrow t) = \Lambda(t'\rightarrow t) \circ \Phi(0\rightarrow t')$.
+	
+	\paragraph{Def: posivite divisibility} Same definition but now $\Lambda$ is only required to be linear positive and trace preserving. It is clear that positive divisibility, lacking complete positivity, has no physical meaning in general and that it is implied by divisibility. The trace distance criterion below will illustrate why this definition was introduced at all.
+	\vspace{4mm}
+	
+	Given a family $\{\Phi(0\rightarrow t)\}_t$, we want to find necessary and/or sufficient conditions for it to be divisible. We will give only one instance of such criteria, but there are more in the literature.
+	\subsubsection{Trace distance}
+	We know that the trace distance between two states cannot expand during a physical time evolution. Therefore, fixing $t$, $t'\le t$ and two states $\rho(0),\sigma(0)$ of S, we trivially have
+	\[ D(\sigma(t), \rho(t)) \le D(\sigma(0), \rho(0)),\qquad D(\sigma(t'), \rho(t')) \le D(\sigma(0), \rho(0)) \]
+	If the family is divisible, then also
+	\[ D(\sigma(t), \rho(t)) \le D(\sigma(t'), \rho(t'))  \]
+	that is, $D(\sigma(t), \rho(t))$ is monotonically non-increasing. Unfortunately even positive divisible families have this property, so we can immediately tell that the condition is necessary (for $\{\Phi\}_t$ to be divisible) but not sufficient.
+	
+	\subsection{Relation with markovianity}
+	We give all definitions as if time were discrete. Generalization to continuous time is straightforward.
+	\paragraph{Def: random process} A random process is a sequence of outcomes for some event. The outcomes are labelled in time as $x_1,x_2,\dots,x_n$. There is a notion of probability for any sequence of outcomes $P(x_1,x_2,\dots,x_n)$ (\emph{joint probability}). There is also a notion of \emph{conditional probability} $P(x_n|(x_1,\dots,x_{n-1})) = \dfrac{P(x_1,\dots,x_{n-1},x_n)}{P(x_1,\dots,x_{n-1})}$. The conditional probability acts as a sort of dynamical law of evolution: it maps states (probability distributions) into other states forward in time.
+	
+	\paragraph{Def: markovian random process} 
+	A random process is \emph{markovian} if the conditional probability of the $n-th$ outcome depends only on the $(n-1)-th$ outcome.
+	\[ P(x_n|(x_1,\dots,x_{n-1})) \equiv P(x_n|x_{n-1}) \]
+	We say that the system has no memory. It is clear that a markovian random process is divisible (just apply the conditional probability law of evolution to get $\Lambda$).
+	
+	A divisible random process is markovian (define $P(x_n|x_{n-1}$ as the probability of outcome $x_n$ when applying $\Lambda(t_{n-1}\rightarrow t_n)$ to a distribution centred at $x_{n-1}$).
+	
+	Therefore we will use markovian and divisible interchangeably.
+	
+	\paragraph{Example}
+	Consider Rabi oscillations of an atom trapped in an electromagnetic cavity. The system S (atom) can either be in the ground state or in a particular excited state of energy $\omega$, and the electromagnetic modes allowed in the cavity have been reduced to a single one of same frequency $\omega$.
+	
+	\noindent We can define time evolution for the atom by tracing away the cavity. The family $\{\Phi\}_t$ generated in this way is clearly not divisible: the system state oscillates from the initial state to the ground state.
+	
+	However, if we allow leaks of energy from the cavity (local environment) to the outside world (distant environment) then, assuming enough dissipation, the state of the atom will simply flow to the ground and the evolution will become markovian.
 	
 \end{document}
