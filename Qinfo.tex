@@ -15,6 +15,7 @@
 \newcommand{\deriv}[2]{\dfrac{\dd #1}{\dd #2}}
 \newcommand{\pderiv}[2]{\dfrac{\partial #1}{\partial #2}}
 \newcommand{\HH}{\mathcal{H}}
+\newcommand{\LL}{\mathcal{L}}
 
 \newcommand\braa[1]{{\langle\langle{#1}|}}
 \newcommand\kett[1]{{|{#1}\rangle\rangle}}
@@ -47,7 +48,7 @@
 	\tableofcontents
 	\clearpage
 	\section{Lecture}
-	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes 1_E$, $1_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
+	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes \hat{1}_E$, $\hat{1}_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
 	
 	States of $S$ are density matrices $\rho_S\in\sigma(\HH_S)$.
 	The time evolution operator is $U_{SE}(t) = \exp^{-i H_{SE} t}$. It maps $\rho_{SE}(0)$ into $\rho_{SE}(t) = U_{SE}(t) \rho_{SE}(0) U^\dagger_{SE}(t)$. Assuming the initial state factorizes into $\rho_S(0)\otimes\tau_E(0)$, we get
@@ -67,14 +68,14 @@
 	\subsubsection{Physical representation}
 	The one we just described.
 	\subsubsection{Stinespring representation}
-	We know we can purify a state by adding extra degrees of freedom. Suppose we purify the state of the environment $\tau_E(0)$ by adding a system $E_1$, $E' = E+E_1$. Then $\tau_E(0) = \Tr_{E_1} \left(\ket{0}_{E'}\bra{0}\right) $. Then, defining $U'_{SE'} = U_{SE} \otimes 1_{E'}$, we get (simple check)
+	We know we can purify a state by adding extra degrees of freedom. Suppose we purify the state of the environment $\tau_E(0)$ by adding a system $E_1$, $E' = E+E_1$. Then $\tau_E(0) = \Tr_{E_1} \left(\ket{0}_{E'}\bra{0}\right) $. Then, defining $U'_{SE'} = U_{SE} \otimes \hat{1}_{E'}$, we get (simple check)
 	\[ \Phi\left[\hat{\Theta}\right] = \Tr_{E'} \left[ U'_{SE'} \left( \hat{\Theta} \otimes \ket{0}_{E'}\bra{0} \right) {U'}^\dagger_{SE'} \right] \]
 	
 	We have thus proved that the Stinespring representation is not only a special case of physical representation, but equivalent to it. They are both \emph{extrinsic} representations.
 	
 	\subsubsection{Kraus representation}
 	Kraus representation is \emph{intrinsic}, no environment needed. It is defined in terms of a Kraus set $M_k\in \mathcal{L}(\HH_S)$.
-	\[ \Phi\left[\hat{\Theta}\right] = \sum_{k=1}^D M_k \hat{\Theta} M_k^\dagger,\qquad \sum_{k=1}^D M_k^\dagger M_k = 1_S \]
+	\[ \Phi\left[\hat{\Theta}\right] = \sum_{k=1}^D M_k \hat{\Theta} M_k^\dagger,\qquad \sum_{k=1}^D M_k^\dagger M_k = \hat{1}_S \]
 	We already know how to go from Stinespring to Kraus, we now show the other direction.%SHOW ANYWAY
 	
 	\subsubsection{From Kraus to Stinespring}
@@ -96,7 +97,7 @@
 		\item Trace preserving
 	\end{itemize}
 	maps. We remind the reader of the definition of complete positivity. Given $\Phi$ superoperator on $S$, $\Phi$ is completely positive if for all ancillas $A$
-	\[ (\Phi\otimes 1_A):\, \mathcal{L}(\HH_S\otimes \HH_A) \rightarrow \mathcal{L}(\HH_S\otimes \HH_A) \]
+	\[ (\Phi\otimes \hat{1}_A):\, \mathcal{L}(\HH_S\otimes \HH_A) \rightarrow \mathcal{L}(\HH_S\otimes \HH_A) \]
 	is completely positive. Complete positivity implies positivity, but not vice-versa. %GIVE EXAMPLE
 	This stronger requirement is necessary when we remember that we can always view any system $S$ as part of a larger system $S+A$, where $A$ maybe is far away and irrelevant.
 	
@@ -107,13 +108,13 @@
 	We first consider any orthonormal basis $\ket{k}_S$, $\ket{k}_A$ and construct
 	\[ \ket{\psi_M}_{SA} = \sum_{k=1}^{d} \dfrac{\ket{k}_S\otimes\ket{k}_A}{\sqrt{d}} \]
 	maximally entangled state. The Choi state is then defined as
-	\[ \rho_{CJ}^\Phi = \left(\Phi\otimes 1_A\right) (\ket{\psi_M}_{SA}\bra{\psi_M}) \]
+	\[ \rho_{CJ}^\Phi = \left(\Phi\otimes \hat{1}_A\right) (\ket{\psi_M}_{SA}\bra{\psi_M}) \]
 	Notice that it is indeed a state. The choice is not unique because we can always change basis. Nevertheless we can now write down a formula (proof by substitutions) for the evolution of any pure state of $S$ in terms of $\rho_{CJ}^\Phi$
 	\[ \ket{\psi}_S\bra{\psi} \rightarrow \Phi\left(\ket{\psi}_S\bra{\psi}\right) = d\, \prescript{}{A}{\braket{\psi^* | \rho_{CJ}^\Phi | \psi^*}}_A \]
 	where $\ket{\psi^*}_A=\sum \alpha_k^* \ket{k}_A$ if $\ket{\psi}_S=\sum \alpha_k \ket{k}_S$. We can rewrite it as
 	\begin{equation}
 	\label{eq:1}
-	\Phi\left[ \rho_S \right] = d\, \Tr_A\left[ \left(1_S \otimes \rho_A^t \right) \rho_{CJ}^\Phi \right]
+	\Phi\left[ \rho_S \right] = d\, \Tr_A\left[ \left(\hat{1}_S \otimes \rho_A^t \right) \rho_{CJ}^\Phi \right]
 	\end{equation}
 	We immediately see the equivalence when $\rho_S$ is pure (note that $\rho_A^t=\rho_A^*$ due to hermiticity. Note the dependence on the basis chosen to define $\rho_{CJ}$); the extension to generic density matrix $\rho_S$ follows from linearity.
 	
@@ -172,13 +173,13 @@
 	
 	\subsubsection{Diamond distance}
 	We instead consider the diamond distance $D_\diamond$, defined as
-	\[ D_\diamond\left(\Phi_1, \Phi_2 \right) = D_1\left( \Phi_1\otimes 1_A, \Phi_2 \otimes 1_A \right) \]
+	\[ D_\diamond\left(\Phi_1, \Phi_2 \right) = D_1\left( \Phi_1\otimes \hat{1}_A, \Phi_2 \otimes \hat{1}_A \right) \]
 	where $A$ is an ancillary system of dimensionality equal to that of $S$.
 	
 	\noindent This distance is bounded even when considering multiple copies of the same channel.
 	
 	We notice that
-	\[ D_\diamond(\Phi_1, \Phi_2) \ge d_1\left( (\Phi_1\otimes 1_A)(\rho_M), (\Phi_2\otimes 1_A)(\rho_M) \right),\quad \rho_M = \ket{\psi_M}_{SA}\bra{\psi_M} \]
+	\[ D_\diamond(\Phi_1, \Phi_2) \ge d_1\left( (\Phi_1\otimes \hat{1}_A)(\rho_M), (\Phi_2\otimes \hat{1}_A)(\rho_M) \right),\quad \rho_M = \ket{\psi_M}_{SA}\bra{\psi_M} \]
 	so
 	\[ D_\diamond (\Phi_1, \Phi_2) \ge d_1\left(\rho_{CJ}^{\Phi_1},\,\, \rho_{CJ}^{\Phi_2}\right) \]
 	
@@ -188,7 +189,7 @@
 	exploiting the trace preserving property of $\Phi$ we get
 	\begin{equation}
 	\label{eq:7}
-	\Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_k \ket{k}_A\bra{k} = \dfrac{1}{d} 1_A
+	\Tr_S\left[\rho_{CJ}\right] = \dfrac{1}{d} \sum_k \ket{k}_A\bra{k} = \dfrac{1}{d} \hat{1}_A
 	\end{equation}
 	Therefore a Choi state reduces to a maximally mixed state on the ancilla.
 	
@@ -210,7 +211,7 @@
 	\vspace{3mm}
 	
 	The action of $\Phi_H$ in Stinespring representation is left as an exercise, but (my) result is
-	\[ \hat{O}_S \rightarrow \prescript{}{E}{\braket{0|U_{SE}^\dagger (\hat{O}_S\otimes 1_E) U_{SE}|0}_E} \]
+	\[ \hat{O}_S \rightarrow \prescript{}{E}{\braket{0|U_{SE}^\dagger (\hat{O}_S\otimes \hat{1}_E) U_{SE}|0}_E} \]
 	
 	\subsection{Complementary channel}
 	Consider a Stinespring representation of a quantum channel $\Phi$. We can picture the evolution as a sort of "scattering" of system $S$ in state $\rho$ with system $E$ in state $\ket{0}_E$. The output is of course
@@ -232,7 +233,7 @@
 	\[ \tilde{\Phi}(\rho) = \Lambda \circ \Phi(\rho) \quad \forall \rho \]
 	The physical meaning is that we can \emph{degrade} the state of the system $S$ through some noise and obtain the state of $E$. The state of the environment contains no additional information; $\Phi$ can carry more information than $\tilde{\Phi}$.
 	
-	\paragraph{Example} $\Phi = 1_S$ is a degradable channel. Proof: Given $\tilde{\Phi}$ complementary channel of the identity, I claim that $\Lambda = \tilde{\Phi}$ is the right map. It is LCPT and $\tilde{\Phi} = \tilde{\Phi} \circ 1$.
+	\paragraph{Example} $\Phi = \hat{1}_S$ is a degradable channel. Proof: Given $\tilde{\Phi}$ complementary channel of the identity, I claim that $\Lambda = \tilde{\Phi}$ is the right map. It is LCPT and $\tilde{\Phi} = \tilde{\Phi} \circ 1$.
 	
 	\subsection{Anti-degradability}
 	We say that a channel $\Phi$ is anti-degradable if there exists $\Lambda':\mathcal{L}(\HH_E)\rightarrow\mathcal{L}(\HH_S)$ LCPT s.t.
@@ -268,13 +269,13 @@
 		\item anti-degradability is equivalent to weak anti-degradability
 		\item degradability implies weak degradability (not vice-versa). W/o proof.
 	\end{itemize}
-	One implication is easy: take a purification of $\tau_E$, for example $\ket{\phi}_{AE}$ s.t. $\Tr_A\left[ \ket{\phi}\bra{\phi} \right] = \tau_E$. Then $U_{SE}\otimes 1_A$, $\ket{\phi}_{AE}$ are a Stinespring representation for $\Phi$ with environment AE.
+	One implication is easy: take a purification of $\tau_E$, for example $\ket{\phi}_{AE}$ s.t. $\Tr_A\left[ \ket{\phi}\bra{\phi} \right] = \tau_E$. Then $U_{SE}\otimes \hat{1}_A$, $\ket{\phi}_{AE}$ are a Stinespring representation for $\Phi$ with environment AE.
 	
 	Define
-	\[ \tilde{\Phi}_{AE}(\rho) = \Tr_S\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] \]
+	\[ \tilde{\Phi}_{AE}(\rho) = \Tr_S\left[ (U_{SE}\otimes \hat{1}_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes \hat{1}_A) \right] \]
 	and observe that
-	\[ \Phi(\rho) = \Tr_{AE}\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] \]
-	\[ \tilde{\Phi}_W(\rho) = \Tr_{AS}\left[ (U_{SE}\otimes 1_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes 1_A) \right] = \Tr_A\left[\tilde{\Phi}_{AE}(\rho)\right] \]
+	\[ \Phi(\rho) = \Tr_{AE}\left[ (U_{SE}\otimes \hat{1}_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes \hat{1}_A) \right] \]
+	\[ \tilde{\Phi}_W(\rho) = \Tr_{AS}\left[ (U_{SE}\otimes \hat{1}_A) (\rho\otimes \ket{\phi}_{AE}\bra{\phi}) (U_{SE}^\dagger\otimes \hat{1}_A) \right] = \Tr_A\left[\tilde{\Phi}_{AE}(\rho)\right] \]
 	If $\Phi$ is degradable, then $\tilde{\Phi}_{AE} = \Lambda \circ \Phi$. Thus we can take the output of $\Phi$, process it with $\Lambda$ and then trace out the ancilla to get $\tilde{\Phi}_W(\rho)$.
 	
 	\subsection{Compatible channels}
@@ -329,12 +330,12 @@
 	\subsection{Quantum operations}
 	We generalize the notion of quantum channel to \emph{quantum operations}: linear completely positive trace reducing maps, that is
 	\[ \Lambda\left[\theta\right]\,s.t.\,\Tr\left[\Lambda[\theta]\right] \le \Tr[\theta] \]
-	These maps can be physically realized if the true evolution happens in a larger space. Quantum operations admit a (sort of) Kraus decomposition where $\sum_k M_k^\dagger M_k \le 1_S$.
+	These maps can be physically realized if the true evolution happens in a larger space. Quantum operations admit a (sort of) Kraus decomposition where $\sum_k M_k^\dagger M_k \le \hat{1}_S$.
 	
 	\subsubsection{POVM}
 	We recall some basic facts about POVM, which will play a role shortly.
 	
-	A POVM is a set $\{E_j\}$ of operators s.t. $\sum E_j = 1_S$, $E_j\ge 0$. They represent measurements: each $j$ is one possible outcome of the measurement associated with the POVM. How do we use them?
+	A POVM is a set $\{E_j\}$ of operators s.t. $\sum E_j = \hat{1}_S$, $E_j\ge 0$. They represent measurements: each $j$ is one possible outcome of the measurement associated with the POVM. How do we use them?
 	The probability of outcome $j$ is
 	\[ p_j(\rho) = \Tr\left[ E_j \rho \right] \]
 	and the state after the measurement is (supposing $j$ came out)
@@ -351,8 +352,8 @@
 	
 	\subsection{Examples of quantum channels}
 	\subsection{Unital quantum channels}
-	A channel is called unital if $\Phi(1_S) = 1_S$. Put differently, the maximally mixed state is a fixed point. Unitary maps are unital
-	\[ \Phi(\rho) = U\rho U^\dagger,\qquad 1_S \rightarrow 1_S \]
+	A channel is called unital if $\Phi(\hat{1}_S) = \hat{1}_S$. Put differently, the maximally mixed state is a fixed point. Unitary maps are unital
+	\[ \Phi(\rho) = U\rho U^\dagger,\qquad \hat{1}_S \rightarrow \hat{1}_S \]
 	Unital channels are $\mathbf{closed}$ under convex combinations.
 	
 	\subsubsection{Adjoint channel}
@@ -376,14 +377,14 @@
 	
 	It is straightforward to see that $\Phi(\vec{a})$ must be a linear map, due to linearity of $\Phi$.
 	\[ a'_i = T_{ij} a_j + b_i \]
-	The trace preserving property is trivial. $\vec{b}$ is the Bloch vector of $\Phi\left(\dfrac{1_S}{2}\right)$. If $\Phi$ is unital, then trivially $\vec{b} = 0$.
+	The trace preserving property is trivial. $\vec{b}$ is the Bloch vector of $\Phi\left(\dfrac{\hat{1}_S}{2}\right)$. If $\Phi$ is unital, then trivially $\vec{b} = 0$.
 	
 	Complete positivity leads to further constraints, which we will discuss at the beginning of next lecture.
 	
 	
 	\subsubsection{Entanglement breaking channels}
 	A channel $\Phi$ on S is entanglement breaking if, for all ancillas A and initial states $\rho_{SA}$
-	\[ (\Phi\otimes 1_A)(\rho_{SA}) = \rho'_{SA} \]
+	\[ (\Phi\otimes \hat{1}_A)(\rho_{SA}) = \rho'_{SA} \]
 	where $\rho'_{SA}$ is $\mathbf{separable}$. Physically, local noise is capable of destroying all entanglement in the whole system.
 	
 	The set of all entanglement breaking channels is closed under convex combinations.
@@ -413,11 +414,11 @@
 	\vspace{2mm}
 	
 	We now prove the converse. Given $\Phi$ entanglement breaking, construct $\rho_{CJ}^\Phi$. By definition of CJ state and entanglement breaking
-	\[ \rho_{CJ}^\Phi = (\Phi\otimes 1_A)(\ket{\psi_M}\bra{\psi_M}) = \sum_j p_j\, \rho_j^S\otimes \sigma_j^A \]
+	\[ \rho_{CJ}^\Phi = (\Phi\otimes \hat{1}_A)(\ket{\psi_M}\bra{\psi_M}) = \sum_j p_j\, \rho_j^S\otimes \sigma_j^A \]
 	but now we can reconstruct the action of $\Phi$ via the CJ isomorphism
-	\[ \Phi(\rho_S) = d \Tr_A\left[ \rho_{CJ}^\Phi (1_S\otimes \rho_A^t) \right] = \sum_j p_j\,d\,\Tr_A\left[ \sigma_j^A \rho_A^t \right] \rho_j^S = \sum_j \Tr\left[ p_j\,d\, \sigma_j^t \rho \right] \rho_j^S \]
+	\[ \Phi(\rho_S) = d \Tr_A\left[ \rho_{CJ}^\Phi (\hat{1}_S\otimes \rho_A^t) \right] = \sum_j p_j\,d\,\Tr_A\left[ \sigma_j^A \rho_A^t \right] \rho_j^S = \sum_j \Tr\left[ p_j\,d\, \sigma_j^t \rho \right] \rho_j^S \]
 	All that is left to prove is that $E_j = d\,p_j\,\sigma_j^t$ are a POVM set. They are completely positive (trivially) and
-	\[ d\sum_j p_j\,\sigma_j = d \Tr_S\left[ \rho_{CJ}^\Phi \right] = 1_A \]
+	\[ d\sum_j p_j\,\sigma_j = d \Tr_S\left[ \rho_{CJ}^\Phi \right] = \hat{1}_A \]
 	where we used \ref{eq:7} in the last step.
 	
 	
@@ -467,7 +468,7 @@
 	\subsection{Infinite dimensional $\HH$}
 	$\HH$ must be separable, that is it must admit a $\mathbf{countably}$ infinite complete set of linearly independent vectors.
 	Not all operators on $\HH$ are equally regular: a famous example of the nonsense you get when you're too cavalier about this is
-	\[ \Tr\left[ xp - px \right] = \Tr\left[ i\hbar 1_S \right] \rightarrow 0 = i\hbar\infty?! \]
+	\[ \Tr\left[ xp - px \right] = \Tr\left[ i\hbar \hat{1}_S \right] \rightarrow 0 = i\hbar\infty?! \]
 	We identify the set $\mathcal{B}(\HH) \subset \mathcal{L}(\HH)$ of \emph{bounded} linear operators. These operators have finite norm and are continuous. Further, we identify $\mathcal{B}_1(\HH) \subset \mathcal{B}(\HH)$ the set of \emph{trace class} operators, for which there is a well-behaved notion of trace. The operators are of central interest to us because density matrices are trace 1.
 	
 	The action of any channel $\Phi$ (and $\Phi_H$) can be extended from $\sigma(\HH)$ to $\mathcal{B}_1(\HH)$, but no further.
@@ -551,8 +552,8 @@
 	which can be used to summarize the commutation relations as
 	\[ [R_i, R_j] = i (\sigma_{2n})_{ij} \]
 	\[ \sigma_{2n} = \begin{pmatrix}
-	0 & 1_{n _xn} \\
-	-1_{n _xn} & 0 \\
+	0 & \hat{1}_{n _xn} \\
+	-\hat{1}_{n _xn} & 0 \\
 	\end{pmatrix} \]
 	where $\sigma_{2n}$ is the \emph{commutation matrix} of the model. We give some properties of $\sigma_{2n}$
 	\[ \det \sigma_{2n} = 1,\qquad \sigma_{2n}^t = \sigma_{2n}^{-1} = -\sigma_{2n} \]
@@ -672,7 +673,7 @@
 	
 	We immediately see that $\Lambda$ is linear and trace preserving, but we claim that almost always it will not be completely positive.
 	To check that we may consider the Choi isomorphism and check if the Choi operator $\theta_{CJ}^\Lambda$ is positive semidefinite
-	\[ (\Lambda(t'\rightarrow t)\otimes 1_A) (\ket{\psi_M}\bra{\psi_M}) = \theta_{CJ}^\Lambda \ge 0 \]
+	\[ (\Lambda(t'\rightarrow t)\otimes \hat{1}_A) (\ket{\psi_M}\bra{\psi_M}) = \theta_{CJ}^\Lambda \ge 0 \]
 	(we remind the reader that $\Lambda$ is LCPT \emph{iff} $\theta_{CJ}^\Lambda \ge 0$). We won't show this, but claim that this almost never happens.
 	
 	\subsection{Recovering divisibility}
@@ -719,4 +720,65 @@
 	
 	However, if we allow leaks of energy from the cavity (local environment) to the outside world (distant environment) then, assuming enough dissipation, the state of the atom will simply flow to the ground and the evolution will become markovian.
 	
+	\section{Lecture}
+	\subsection{Master equation}
+	\subsubsection{Dynamical semigroup}
+	Given $\mathcal{F} = \{\Phi(0\rightarrow t)\}_t$ divisible, we say that it is a \emph{dynamical semigroup} if the connecting superoperator is homogeneous in time (i.e. it depends only on $t'-t$).
+	
+	\subsubsection{Master equation}
+	If the evolution is governed by a dynamical semigroup, $\rho$ obeys a first order differential equation called \emph{master equation}
+	\[ \dot{\rho}(t) = \LL\left[ \rho(t) \right] \]
+	where $\LL$ is the \emph{Lindblad} superoperator (also called $GKSL$ superoperator). We proceed to give a general form of this superoperator.
+	\[ \LL[\hat{\theta}] = -i \left[H, \hat{\theta}\right] + \mathcal{D}[\hat{\theta}] \]
+	where $H$ is the \emph{effective hamiltonian} (hermitean) and $\mathcal{D}$ is called the \emph{dissipator}. $\mathcal{D}$ can always be written using a set of operators called \emph{Lindblad operators} $\{ L_k \}_k$ as
+	\[ \mathcal{D}[\theta] = \sum_k \left(2 L_k\theta L_k^\dagger - L_k^\dagger L_k \theta - \theta L_k^\dagger L_k \right) \]
+	We claimed that for any dynamical semigroup there is a $\LL$ superoperator, but the converse is also true, provided $\LL$ is of the form given above (there are no restrictions on $\{L_k\}$).
+	
+	We will now prove that, given a dynamical semigroup, we can write down a master equation. Next lecture we will give a microscopic derivation of the master equation starting from a physical representation system+environment.
+	
+	\subsubsection{From dynamical semigroup to $\LL$}
+	We are given a dynamical semigroup family $\mathcal{F}$ of superoperators. Time homogeneity implies ($t \ge t'$)
+	\[ \Phi(t) = \Lambda_{t-t'} \circ \Phi(t') \]
+	and, putting $t'=0$, it is easily shown that
+	\[ \Lambda_{t-t'} = \Phi(t-t') \]
+	We begin by observing that
+	\[ \dot{\rho}(t) = \lim_{\epsilon\rightarrow 0^+} \dfrac{\rho(t+\epsilon)-\rho(t)}{\epsilon} = \left(\lim_{\epsilon\rightarrow 0^+}
+	\dfrac{\Phi(\epsilon)-1}{\epsilon}\right) \rho(t) \equiv \LL[\rho(t)] \]
+	We now have to show that $\LL$ can be cast in the form detailed above.
+	
+	First, consider a Kraus decomposition $\{M_k(t)\}$ for $\Phi(t)$ at any given $t$. It can be shown that, because we assume $\Phi(t)$ to be differentiable, each element of the Kraus set is differentiable.
+	
+	We introduce a basis $\{\hat{F}_k\}_{k=0\dots (d^2-1)}$ for the $d$ dimensional space of linear operators on $\HH_S$.
+	Then we can decompone each element of the Kraus set as
+	\[ M_l(t) = \sum_{k=0}^{d^2-1} C_{lk}(t) \hat{F}_k \]
+	We assume $\hat{F}_0 = \hat{1}$. Then $C_{lk}(0) = \delta_{k,0}$. By substitution it is easy to show that
+	\[ \LL[\theta] = \deriv{\Phi}{t}(t=0) [\theta] = \deriv{}{t} \sum_{k,k'=0}^{d^2-1} \left( \sum_l C_{lk}(t) C_{lk'}^*(t) \right)|_{t=0} \hat{F}_k \theta \hat{F}_{k'}^\dagger \]
+	\[ = \sum_{k,k'} \dot{\chi}_{k,k'}(0) \hat{F}_k \theta \hat{F}_{k'}^\dagger,\qquad \chi_{k,k'}(t) = \sum_l C_{lk}(t) C_{lk'}^*(t) \]
+	$\chi_{k,k'}(t)$ is a $d \times d$ positive semidefinite matrix. For generic $t$, its derivative can only be proven to be hermitean.
+	
+	We now split the sum over $k,k'$ in four pieces
+	\[ \LL[\theta] = 2 \dfrac{\dot{\chi}_{00}(0)}{2} \hat{1}\theta \hat{1} + \sum_{k=1} \dot{\chi}_{0k}(0) \hat{1} \theta \hat{F}_k^\dagger +
+	\sum_{k=1} \dot{\chi}_{k0}(0) \hat{F}_k \theta \hat{1} + \sum_{k,k'=1} \dot{\chi}_{kk'}(0) \hat{F}_k \theta \hat{F}_{k'}^\dagger \]
+	Rearranging we get
+	\[ \LL[\theta] = \hat{A} \theta + \theta \hat{A}^\dagger + \sum_{k,k'=1}^{d^2-1} \dot{\chi}_{kk'}(0) \hat{F}_k \theta \hat{F}_{k'}^\dagger,\qquad	\hat{A} = \dfrac{\dot{\chi}_{00}(0)}{2} \hat{1} + \sum_{k=1} \dot{\chi}_{k0}(0) \hat{F}_k \]
+	
+	Considering $\dot{\rho}(t) = \LL[\rho(t)]$, taking the trace and using linearity to argue $\Tr[\dot{\rho}]=0$ we deduce
+	\[ \Tr\left[ \LL[\hat{\theta}] \right] = 0 \]
+	where $\hat{\theta}$ is any operator, not just a density matrix, because any $\hat{\theta}$ can be decomposed in terms of density matrices and all equations are linear. Substituting our expression for $\LL[\theta]$ and using the ciclicity of the trace we obtain
+	\[ \Tr\left[ \left(\hat{A} + \hat{A}^\dagger + \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k\right) \hat{\theta} \right] = 0,\quad \forall\, \hat{\theta} \]
+	Because $\Tr[AB^\dagger]$ is a nondegenerate scalar product, we deduce that the operator in parenthesis is identically zero. We deduce
+	\[ \hat{A} + \hat{A}^\dagger = - \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k \]
+	We have therefore fixed the hermitean part of $\hat{A}$; the anti-hermitean part is unconstrained. Calling it $-iH$, we can write
+	\[ \hat{A} = -\frac{1}{2} \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k - i\hat{H} \]
+	
+	Substituting $\hat{A}$ into $\LL$ we almost get what we want. The essential problem is that we still have a double summation over $k,k'$ from 1 to $d^2-1$. To solve that, we will diagonalize the submatrix $\xi_{kk'} = \dot{\chi}_{kk'}(0)$, $k,k'\ge 1$, by first showing that $\xi$ is positive semidefinite.
+	\[ \xi_{kk'} = \dot{\chi}_{kk'}(0) = \lim_{\epsilon\rightarrow 0^+} \dfrac{\chi_{kk'}(\epsilon) -\chi_{kk'}(0)}{\epsilon} =
+	\lim_{\epsilon\rightarrow 0^+} \dfrac{\chi_{kk'}(\epsilon)}{\epsilon} \]
+	where in the last step we used that, for $k,k'\ge 1$, $\chi_{kk'}(0)=0$ (by definition, using $C_{lk}(0)=\delta_{k,0}$).
+	$\chi_{kk'}(\epsilon)\ge 0$ for any $\epsilon$, therefore $\xi\ge 0$. Diagonalizing $\xi = UDU^\dagger$ and defining
+	\[ L_j = \sqrt{D_{jj}} \sum_{k=1} \frac{U_{kj}}{2} \hat{F}_k,\qquad L_j^\dagger = \sqrt{D_{jj}} \sum_{k=1} \frac{U^\dagger_{jk}}{2} \hat{F}^\dagger_k \]
+	we (at last) get the desired form for $\LL$.
+	
+	\newpage
+	The end.
 \end{document}
