@@ -48,7 +48,7 @@
 	\tableofcontents
 	\clearpage
 	\section{Lecture}
-	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes \hat{1}_E$, $\hat{1}_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
+	Consider a system $S$ coupled to an environment $E$ such that $S+E$ is a closed system described by the Hamiltonian $H_{SE} = H_S + H_E + V_{SE}$, where $H_S,H_E$ stand for $H_S\otimes \hat{1}_E$, $\hat{1}_S\otimes H_E$, and $V_{SE}$ represents an interaction term.
 	
 	States of $S$ are density matrices $\rho_S\in\sigma(\HH_S)$.
 	The time evolution operator is $U_{SE}(t) = \exp^{-i H_{SE} t}$. It maps $\rho_{SE}(0)$ into $\rho_{SE}(t) = U_{SE}(t) \rho_{SE}(0) U^\dagger_{SE}(t)$. Assuming the initial state factorizes into $\rho_S(0)\otimes\tau_E(0)$, we get
@@ -62,7 +62,7 @@
 	
 	\noindent Second, $\Phi$ is defined on \emph{all} linear operators $\mathcal{L}(\HH)$, not just $\sigma(\HH)$; in particular, observables. The extension is trivial
 	\[ \Phi\left[\hat{\Theta}\right] = \Tr_E\left[ U_{SE}(t) \left(\hat{\Theta}\otimes\tau_E(0)\right) U^\dagger_{SE}(t) \right] \]
-	and it is unique if we require linearity (\emph{proof}: any operator can be decomposed as a linear sum of density matrices). Unicity hold even for infinite dimensional systems.
+	and it is unique if we require linearity (\emph{proof}: any operator can be decomposed as a linear sum of density matrices). Uniqueness hold even for infinite dimensional systems.
 	
 	\subsection{Representations of quantum channels}
 	\subsubsection{Physical representation}
@@ -101,7 +101,7 @@
 	is completely positive. Complete positivity implies positivity, but not vice-versa. %GIVE EXAMPLE
 	This stronger requirement is necessary when we remember that we can always view any system $S$ as part of a larger system $S+A$, where $A$ maybe is far away and irrelevant.
 	
-	It is easy to show that all representations fulfil these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
+	It is easy to show that all representations fulfill these axioms. We now exhibit an explicit Kraus set for a given channel $\Phi$ satisfying the axioms. To do so, we introduce the Choi-Jamiolkowski isomorphism.
 	
 	\subsection{Choi-Jamiolkowski construction}
 	Given $\Phi$ acting on $S$, we construct an ancilla $A$ with the same dimensionality $d$ (assumed finite, but extensions do exist).
@@ -689,7 +689,7 @@
 	We begin by defining precisely what we mean by divisibility
 	\paragraph{Def: divisibility} A family $\{\Phi(0\rightarrow t)\}_t$ is said to be divisible if $\forall\,t, t'\le t$ there is $\Lambda(t'\rightarrow t)$ connecting channel LCPT s.t. $\Phi(0\rightarrow t) = \Lambda(t'\rightarrow t) \circ \Phi(0\rightarrow t')$.
 	
-	\paragraph{Def: posivite divisibility} Same definition but now $\Lambda$ is only required to be linear positive and trace preserving. It is clear that positive divisibility, lacking complete positivity, has no physical meaning in general and that it is implied by divisibility. The trace distance criterion below will illustrate why this definition was introduced at all.
+	\paragraph{Def: positive divisibility} Same definition but now $\Lambda$ is only required to be linear positive and trace preserving. It is clear that positive divisibility, lacking complete positivity, has no physical meaning in general and that it is implied by divisibility. The trace distance criterion below will illustrate why this definition was introduced at all.
 	\vspace{4mm}
 	
 	Given a family $\{\Phi(0\rightarrow t)\}_t$, we want to find necessary and/or sufficient conditions for it to be divisible. We will give only one instance of such criteria, but there are more in the literature.
@@ -702,14 +702,14 @@
 	
 	\subsection{Relation with markovianity}
 	We give all definitions as if time were discrete. Generalization to continuous time is straightforward.
-	\paragraph{Def: random process} A random process is a sequence of outcomes for some event. The outcomes are labelled in time as $x_1,x_2,\dots,x_n$. There is a notion of probability for any sequence of outcomes $P(x_1,x_2,\dots,x_n)$ (\emph{joint probability}). There is also a notion of \emph{conditional probability} $P(x_n|(x_1,\dots,x_{n-1})) = \dfrac{P(x_1,\dots,x_{n-1},x_n)}{P(x_1,\dots,x_{n-1})}$. The conditional probability acts as a sort of dynamical law of evolution: it maps states (probability distributions) into other states forward in time.
+	\paragraph{Def: random process} A random process is a sequence of outcomes for some event. The outcomes are labeled in time as $x_1,x_2,\dots,x_n$. There is a notion of probability for any sequence of outcomes $P(x_1,x_2,\dots,x_n)$ (\emph{joint probability}). There is also a notion of \emph{conditional probability} $P(x_n|(x_1,\dots,x_{n-1})) = \dfrac{P(x_1,\dots,x_{n-1},x_n)}{P(x_1,\dots,x_{n-1})}$. The conditional probability acts as a sort of dynamical law of evolution: it maps states (probability distributions) into other states forward in time.
 	
 	\paragraph{Def: markovian random process} 
 	A random process is \emph{markovian} if the conditional probability of the $n-th$ outcome depends only on the $(n-1)-th$ outcome.
 	\[ P(x_n|(x_1,\dots,x_{n-1})) \equiv P(x_n|x_{n-1}) \]
 	We say that the system has no memory. It is clear that a markovian random process is divisible (just apply the conditional probability law of evolution to get $\Lambda$).
 	
-	A divisible random process is markovian (define $P(x_n|x_{n-1}$ as the probability of outcome $x_n$ when applying $\Lambda(t_{n-1}\rightarrow t_n)$ to a distribution centred at $x_{n-1}$).
+	A divisible random process is markovian (define $P(x_n|x_{n-1}$ as the probability of outcome $x_n$ when applying $\Lambda(t_{n-1}\rightarrow t_n)$ to a distribution centered at $x_{n-1}$).
 	
 	Therefore we will use markovian and divisible interchangeably.
 	
@@ -749,7 +749,7 @@
 	First, consider a Kraus decomposition $\{M_k(t)\}$ for $\Phi(t)$ at any given $t$. It can be shown that, because we assume $\Phi(t)$ to be differentiable, each element of the Kraus set is differentiable.
 	
 	We introduce a basis $\{\hat{F}_k\}_{k=0\dots (d^2-1)}$ for the $d$ dimensional space of linear operators on $\HH_S$.
-	Then we can decompone each element of the Kraus set as
+	Then we can decompose each element of the Kraus set as
 	\[ M_l(t) = \sum_{k=0}^{d^2-1} C_{lk}(t) \hat{F}_k \]
 	We assume $\hat{F}_0 = \hat{1}$. Then $C_{lk}(0) = \delta_{k,0}$. By substitution it is easy to show that
 	\[ \LL[\theta] = \deriv{\Phi}{t}(t=0) [\theta] = \deriv{}{t} \sum_{k,k'=0}^{d^2-1} \left( \sum_l C_{lk}(t) C_{lk'}^*(t) \right)|_{t=0} \hat{F}_k \theta \hat{F}_{k'}^\dagger \]
@@ -766,7 +766,7 @@
 	\[ \Tr\left[ \LL[\hat{\theta}] \right] = 0 \]
 	where $\hat{\theta}$ is any operator, not just a density matrix, because any $\hat{\theta}$ can be decomposed in terms of density matrices and all equations are linear. Substituting our expression for $\LL[\theta]$ and using the ciclicity of the trace we obtain
 	\[ \Tr\left[ \left(\hat{A} + \hat{A}^\dagger + \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k\right) \hat{\theta} \right] = 0,\quad \forall\, \hat{\theta} \]
-	Because $\Tr[AB^\dagger]$ is a nondegenerate scalar product, we deduce that the operator in parenthesis is identically zero. We deduce
+	Because $\Tr[AB^\dagger]$ is a non-degenerate scalar product, we deduce that the operator in parenthesis is identically zero. We deduce
 	\[ \hat{A} + \hat{A}^\dagger = - \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k \]
 	We have therefore fixed the hermitean part of $\hat{A}$; the anti-hermitean part is unconstrained. Calling it $-iH$, we can write
 	\[ \hat{A} = -\frac{1}{2} \sum_{kk'=1} \dot{\chi}_{kk'}(0) \hat{F}_{k'}^\dagger \hat{F}_k - i\hat{H} \]
@@ -778,6 +778,215 @@
 	$\chi_{kk'}(\epsilon)\ge 0$ for any $\epsilon$, therefore $\xi\ge 0$. Diagonalizing $\xi = UDU^\dagger$ and defining
 	\[ L_j = \sqrt{D_{jj}} \sum_{k=1} \frac{U_{kj}}{2} \hat{F}_k,\qquad L_j^\dagger = \sqrt{D_{jj}} \sum_{k=1} \frac{U^\dagger_{jk}}{2} \hat{F}^\dagger_k \]
 	we (at last) get the desired form for $\LL$.
+	
+	\section{Lecture}
+	\subsection{Fixed point state}
+	We show that $0$ is an eigenvalue of $\LL$. Consider the Liouville representation
+	\[ \kett{\LL[\theta]} = M_\LL \kett{\theta} \]
+	We already proved that $\langle\braket{\hat{1}|\theta}\rangle = \Tr[\theta]$ and that $\Tr[\LL[\rho]] = 0$. Therefore
+	\[ \langle \braket{\hat{1}|M_\LL|\theta}\rangle = 0,\quad \forall\,\theta \]
+	Thus $\langle\braa{\hat{1}}$ is a left eigenvector with eigenvalue 0. 0 is also a right eigenvalue (just linear algebra), but because $M_\LL$ is not normal, we don't know what the corresponding eigenvector is. It can be shown that it can be chosen to be a density matrix (?positivity?notanexercise).%TODO
+	This state $\rho_0$ is a fixed point in the dynamics (generically unique).
+	
+	\subsection{Solving the L. equation and Adjoint}
+	
+	\paragraph{Integrating the Lindblad equation}
+	The solution is
+	\[ \rho(t) = e^{\LL t} \rho(0) \]
+	
+	\paragraph{Adjoint}
+	Recall that in the Heisenberg picture observables evolve, while states do not. We can write a differential equation for the adjoint of $\Phi_t$, if we define $\LL^{(H)}$ as the adjoint of $\LL$.
+	\[ \braket{A}_t = \Tr[A\Phi_t(\rho(0))] \]
+	\[ \dot{\braket{A}}_t = \Tr\left[ A \LL[\rho(t)] \right] = \Tr\left[ \LL^{(H)}[A] \rho(t) \right] = \Tr\left[ \dot{\Phi}^{(H)}_t [A] \rho(t) \right] \]
+	Therefore
+	\[ \dot{\Phi}^{(H)}_t [A] = \LL^{(H)}[A] \]
+	
+	\subsection{Microscopic derivation}
+	Suppose we have a system $S$ coupled to an environment $E$ and that the whole $S+E$ is described by $H = H_S+H_E+H_I$. To derive the master equation we will need some assumptions and some approximations (otherwise there are counterexamples, as we showed discussing Rabi oscillations).
+	
+	We begin by giving some names and providing a brief description.
+	\paragraph{Assumptions}
+	\begin{enumerate}
+		\item Initial condition. At $t=0$ the state of $S+E$ factorizes.
+		\item Stability condition. The state of the environment is stable under its own dynamics: $[\rho_E(0), H_E] = 0$. For example, $\rho_E$ could be a thermal state
+	\end{enumerate}
+
+	\paragraph{Approximations}
+	\begin{enumerate}
+		\item Born approximation (Weak $S$-$E$ coupling), meaning that the dynamics of $E$ is mostly unaffected by $S$ (the converse need not hold). Actually, if you think about an atom as $S$ and all electromagnetic modes as $E$, you realize that radiating a photon brings the environment to an orthogonal state, so we need to be more precise.
+		\item Markov approximation, stating that, if information is transfered from $S$ to $E$, it is lost and never affects $S$ again.
+		\item Secular approximation. Much like the Markov approximation, it is a condition on the internal dynamics of $E$.
+	\end{enumerate}
+	
+	We emphasize that $\mathbf{all}$ of the above assumptions are needed to get a consistent description of $S$. Dropping some hypothesis will not result in an approximately correct master equation, rather it will produce nonsense.
+	
+	\subsubsection{Discussion of the Born approximation}
+	As mentioned, we need to be more specific when discussing the Born approximation. Recall that in lecture 7 we introduced the concept of structured environment. What we are really demanding is that the state of the $\mathbf{local}$ environment should remain unaffected during evolution
+	\[ \rho(0) = \rho_S(0) \otimes \rho_{E_L}(0) \rightarrow \rho(t) = \rho_S(t) \otimes \rho_{E_L}(0) \]
+	The way this is realized is through the fast internal dynamics of the environment. A toy model can help us understand this point.
+	\paragraph{Conveyor belt model} Suppose you are dropping your luggage at the airport conveyor belt. You are the system $S$ dissipating your luggage, and the spot where you put your luggage is your local environment. The internal dynamics of the environment (the full conveyor belt) is so fast that it immediately carries the luggage away and you are effectively interacting with the same local environment all the time. Notice that the key assumption was a difference in the time scales of the two processes.
+	
+	\paragraph{Decomposing the hamiltonian $H_I$}	
+	Given an hermitean operator $H_I\in \LL(\HH_S\otimes \HH_E)$ we can put it in the form
+	\[ H_I = \sum_\alpha \hat{A}_\alpha \otimes \hat{B}_\alpha,\qquad \hat{A}_\alpha \in \LL(\HH_S),\,\hat{B}_\alpha \in \LL(\HH_E)
+	\qquad \hat{A}_\alpha^\dagger = \hat{A}_\alpha,\, \hat{B}_\alpha^\dagger = \hat{B}_\alpha \]
+	Note that the dimensions match: if $\HH$ has dimension $d$, then the space of hermitean operators had dimension $d^2$. Thus a basis of hermitean operators over $\HH_S\otimes \HH_E$ has $d_S^2\, d_E^2$ elements; on the right we can consider $d_S^2$ independent hermitean operators over $\HH_S$ and $d_E^2$ over $\HH_E$. Tensoring means considering all possible pairings.
+	
+	Given that we are interested in $H=H_S+H_E+H_I$, we can always decompose $H$ in such a way so that
+	\[ \Tr_E[\hat{B}_\alpha \rho_E(0)] = 0\quad \forall\,\alpha \]
+	simply replace $\hat{B}_\alpha \rightarrow \hat{B}_\alpha - c_\alpha \hat{1}$ and $H_S \rightarrow H_S + \sum_\alpha c_\alpha \hat{A}_\alpha$, where $c_\alpha$ is chosen appropriately.
+	
+	\subsubsection{Interaction picture}
+	\[ \dot{\rho_{SE}}(t) = -i \left[ H, \rho_{SE}(t) \right] \]
+	We go in the interaction picture with free hamiltonian $H_S+H_E$
+	\[ \tilde{\rho}_{SE}(t) = e^{iH_0 t} \rho_{SE}(t) e^{-iH_0 t}, \qquad \dot{\tilde{\rho}}_{SE}(t) = -i \left[
+	\tilde{H}_I(t), \tilde{\rho}_{SE}(t) \right] \]
+	\[ \tilde{H}_I(t) = e^{iH_0 t} H_I e^{-iH_0 t} = \sum_\alpha \tilde{A}_\alpha(t) \otimes \tilde{B}_\alpha(t) \]
+	\[ \tilde{A}_\alpha(t) = e^{iH_S t} A_\alpha e^{-iH_S t},\qquad \tilde{B}_\alpha(t) = e^{iH_E t} B_\alpha e^{-iH_E t} \]
+	
+	\paragraph{Integrating the EoM}
+	We can formally integrate the equation of motion to get
+	\[ \tilde{\rho}_{SE}(t) = \rho_{SE}(0) - i \int_{0}^{t} [\tilde{H}_I(t'), \tilde{\rho}_{SE}(t')]\,\dd t' \]
+	and substituting into the RHS of the equation of motion we get
+	\[ \dot{\tilde{\rho}}_{SE}(t) = -i[\tilde{H}_I(t), \rho_{SE}(0)] - \int_{0}^{t} \left[\tilde{H}_I(t), [\tilde{H}_I(t'), \tilde{\rho}_{SE}(t')]\right]\,\dd t' \]
+	and taking the trace over $E$
+	\[ \dot{\tilde{\rho}}_S(t) = -i \Tr_E\left[[\tilde{H}_I(t), \rho_{SE}(0)]\right] - \int_{0}^{t} \Tr_E\left[\left[\tilde{H}_I(t), [\tilde{H}_I(t'), \tilde{\rho}_{SE}(t')]\right]\right]\,\dd t' \]
+	
+	\subsubsection{Stability condition} We now show that, because of the stability condition, the first commutator is zero. Having made the factorizability assumption on the initial conditions, we show that $\Tr_E\left[\tilde{H}_I(t) \rho_{SE}(0)\right]=0$ (after this, the whole commutator is easily seen to be zero)
+	\[ \Tr_E\left[\tilde{H}_I(t) \rho_{SE}(0)\right] = \sum_\alpha \Tr_E\left[ \left( e^{iH_S t}A_\alpha e^{-iH_S t} \otimes
+	e^{iH_E t}B_\alpha e^{-iH_E t} \right) \rho_S(0)\otimes \rho_E(0) \right] = \]
+	\[ = \sum_\alpha e^{iH_S t}A_\alpha e^{-iH_S t} \rho_S(0) \Tr_E\left[	e^{iH_E t}B_\alpha e^{-iH_E t} \rho_E(0) \right] = \]
+	\[ = \sum_\alpha e^{iH_S t}A_\alpha e^{-iH_S t} \rho_S(0) \Tr_E\left[ B_\alpha e^{-iH_E t} \rho_E(0) e^{iH_E t} \right] \]
+	\[ = \sum_\alpha e^{iH_S t}A_\alpha e^{-iH_S t} \rho_S(0) \Tr_E\left[ B_\alpha \rho_E(0) \right] = 0 \]
+	where we used cyclicity of the trace, the stability condition, stating that $\rho_E$ does not evolve in time, and the assumption $\Tr_E[B_\alpha \rho_E(0)]=0$ coming from the decomposition of $H$.
+	
+	\subsubsection{Born approximation}
+	We now introduce our first approximation: $\rho_{SE}(t) = \rho_S(t) \otimes \rho_E(0)$.
+	Substituting $\tilde{H}_I(t) = \sum_\alpha \tilde{A}_\alpha(t) \otimes \tilde{B}_\alpha(t)$
+	\[ \dot{\tilde{\rho}}_S(t) = -\int_{0}^{t} \Tr_E\left[ \left[\tilde{H}_I(t), [\tilde{H}_I(t'), \tilde{\rho}_S(t')\otimes \rho_E(0)]\right] \right]\, \dd t' = \]
+	\[ = -\sum_{\alpha\beta} \int_{0}^{t} \dd t'\, C_{\alpha\beta}(t,t') [\tilde{A}_\alpha(t), \tilde{A}_\beta(t')\tilde{\rho}_S(t')] +
+	C_{\beta\alpha}(t',t) [\tilde{\rho}_S(t')\tilde{A}_\beta(t), \tilde{A}_\alpha(t')] \]
+	\[ C_{\alpha\beta}(t,t') = \Tr_E\left[ \tilde{B}_\alpha(t)\tilde{B}_\beta(t') \rho_E(0) \right] \]
+	$C_{\alpha\beta}(t,t')$ are correlation functions which we want to reduce to a delta function $\delta(t-t')$. This way the integro-differential equation will simplify to an ordinary differential equation.
+	
+	First, it is easy to show (using the stability condition) that
+	\[ C_{\alpha\beta}(t,t') = \Tr_E\left[ e^{iH_E (t-t')} B_\alpha e^{-iH_E(t-t')} B_\beta \rho_E(0) \right] = C_{\alpha\beta}(t-t') \]
+	Next, we show that $C_{\alpha\beta}(t) = C_{\beta\alpha}^*(-t)$. By using the above equality
+	\[ C_{\beta\alpha}^*(-t) = \Tr_E\left[ \rho_E(0) B_\alpha e^{-iH_Et} B_\beta e^{iH_Et} \right] = \Tr_E\left[ B_\alpha e^{-iH_Et} B_\beta e^{iH_Et} \rho_E(0) \right] = \]
+	\[ = \Tr_E\left[ B_\alpha e^{-iH_Et} B_\beta \rho_E(0) e^{iH_Et} \right] = \Tr_E\left[ e^{iH_Et} B_\alpha e^{-iH_Et} B_\beta \rho_E(0) \right] = C_{\alpha\beta}(t) \]
+	where we used cyclicity of the trace and $[\rho_E(0), H_E]=0$.
+	
+	\paragraph{Kubo-Martin-Schwinger identity} It is easily shown that, if $\rho_E = \dfrac{e^{-\beta H_E}}{Z_E}$, then
+	\[ C_{\alpha\beta}(t) = C_{\beta\alpha}(-t-i\beta) \]
+	Under this condition it can be shown that the master equation will admit $\rho_S^{fix} = \dfrac{e^{-\beta H_S}}{Z_S}$ as a fixed point of the dynamics, and this point is attractive. Physically, this condition is sufficient to show that $S$ will thermalize to the same temperature of the environment.
+	
+	\subsubsection{Born-Redfield equation} $|C_{\alpha\beta}(t)|$ is often a fast decaying function. We assume that it drops to a negligible value after a time scale $\tau_E$ and that $\tilde{\rho}_S(t) \simeq \tilde{\rho}_S(t+\tau_E)$ (the dynamics of $S$ is slow compared to $E$). We conclude that
+	\[ \dot{\tilde{\rho}}_S(t) \simeq - \sum_{\alpha\beta} \int_{0}^{t}\dd \tau\, \{
+	C_{\alpha\beta} [\tilde{A}_\alpha(t), \tilde{A}_\beta(t-\tau) \tilde{\rho}_S(t) ] +
+	C_{\beta\alpha}(-\tau) [\tilde{\rho}_S(t)\tilde{A}_\beta(t-\tau), \tilde{A}_\alpha(t)] \} \]
+	Considering that $C(\tau)$ has support only around zero, we can extend the upper limit of integration to infinity to obtain the \emph{Born-Redfield equation}
+	
+	\[ \dot{\tilde{\rho}}_S(t) \simeq - \sum_{\alpha\beta} \int_{0}^{\infty}\dd \tau\, \{
+	C_{\alpha\beta} [\tilde{A}_\alpha(t), \tilde{A}_\beta(t-\tau) \tilde{\rho}_S(t) ] +
+	C_{\beta\alpha}(-\tau) [\tilde{\rho}_S(t)\tilde{A}_\beta(t-\tau), \tilde{A}_\alpha(t)] \} \]
+	One might be tempted to say that this equation is `better' than $GKSL$, because we didn't introduce the secular approximation. Actually, the BR equation is $\mathbf{not\, consistent}$, meaning that evolving a state $\rho(0)$ might lead to a $\rho(t)$ not positive semidefinite.
+	All approximations are needed to get a consistent equation.
+	
+	Finally, let us point out that introducing $\tilde{\rho}(t)\simeq \tilde{\rho}(t+\tau_E)$ effectively means averaging out fast oscillations of $\tilde{\rho}(t)$ with characteristic time scale $\tau_E$ much smaller than the time scale of our measuring device. We wash away the fast dynamics, but we keep all the slow dynamics happening with the time scale of the system $S$ itself.
+	
+	\paragraph{Toy model: electromagnetic modes} Assume the algebra of creation and annihilation operators for all electromagnetic modes: $b_k,\,b_k^\dagger$. $\rho = \dfrac{e^{-\beta H}}{Z}$, $H = \sum_k \omega_k b_k^\dagger b_k$. Consider
+	\[ B_1 = \sum_k \gamma_k b_k,\qquad B_2 = \sum_k \gamma_k^* b_k^\dagger \]
+	One can easily compute $C_{\alpha\beta} (t) = \Tr\left[ e^{iH_E t} B_\alpha e^{-iH_Et} B_\beta \rho_E(0) \right]$
+	\begin{align*}
+	\begin{tabular}{|c|c|}
+	\hline 
+	0 & $\sum_k |\gamma_k|^2 e^{-i\omega_k t} (\braket{n_k}+1)$ \\ 
+	\hline 
+	$\sum_k |\gamma_k|^2 e^{-i\omega_k t} \braket{n_k}$ & 0 \\ 
+	\hline 
+	\end{tabular} 
+	\end{align*}
+	where $\braket{n_k} = \dfrac{1}{e^{\beta \omega_k} -1 }$. Assuming one dimension for simplicity, and supposing that $|\gamma|$ is uniform over the interval $(\omega_m, \Omega_M)$ and is zero elsewhere, we can compute $|C_{21}(t)|^2$. (WHAT FOLLOWS HAS NOT BEEN CHECKED! I AINT NO MATTER PHYSICIST!)
+	
+	\[ C_{21}(t) \propto \int_{\omega_m}^{\Omega_M} \dfrac{e^{-i\omega' t}}{e^{\beta \omega'}-1}\,\dd \omega' \]
+	Suppose $\hbar \omega_m \gg k_B T$, which is easily the case if $T=1\mathrm{K}$ and $\omega_m \approx 10^{14}\mathrm{Hz}$ (corresponding to $1\mathrm{eV}$). Then, for the whole domain of integration, we can assume $\beta \omega\gg 1$.
+	\[ C_{21}(t) \simeq \int_{\omega_m}^{\Omega_M} e^{-\omega' (\beta + it)}\,\dd \omega' \simeq \dfrac{e^{-\omega_m(\beta+it)}}{\beta+it},
+	\qquad |C_{21}(t)|^2 \simeq \dfrac{e^{-2\beta \omega_m}}{\beta^2 + t^2},\quad \tau \sim \beta \]
+	where in the last step we assumed $\Omega_M \gg \omega_m$. Plugging the numbers as above, we get $\tau \sim \frac{\hbar}{kT} = 10^{-12}\mathrm{s}$. The period of oscillation of Cesium 133 is close to $10^{-11}\mathrm{s}\gg \tau$.
+	
+	\subsubsection{Secular approximation (rotating wave apprx.)}
+	The idea is that given a sum of many terms, some of which oscillating and some not, the major contribution comes from the non-oscillating terms; the others can be neglected. Let us write $H_S$ as a sum of its eigenvalues multiplied by projection operators on the relative eigenspaces
+	\[ H_S = \sum_{\epsilon} \Pi_\epsilon \epsilon,\qquad \sum_\epsilon \Pi_\epsilon = \hat{1} \]
+	We can write the following expression for $A_\alpha$, where we first sum over $\epsilon,\epsilon'$, keeping the difference $\Delta\epsilon$ fixed
+	\[ A_\alpha = \hat{1}A_\alpha \hat{1} = \sum_{\epsilon,\epsilon'} \Pi_{\epsilon} A_\alpha \Pi_{\epsilon} = \sum_{\Delta\epsilon} A_\alpha(\Delta\epsilon),\quad A_\alpha(\Delta\epsilon) = \sum_{\epsilon=\epsilon'-\Delta\epsilon} \Pi_\epsilon A_\alpha \Pi_{\epsilon'} = A_\alpha^\dagger(-\Delta\epsilon) \]
+	It is easy to show that
+	\[ \tilde{A}_\alpha(\Delta\epsilon)(t) = e^{iH_S t} A_\alpha(\Delta\epsilon) e^{-iH_S t} = e^{-i\Delta\epsilon t} A_\alpha(\Delta\epsilon) \]
+	from which
+	\[ \tilde{A}(t) = \sum_{\Delta\epsilon} e^{-i\Delta\epsilon t} A_\alpha(\Delta\epsilon) \]
+	and, coming back to the Born-Redfield equation,
+	\[ \dot{\tilde{\rho}}_S(t) = \sum_{\Delta\epsilon,\Delta\epsilon'} \sum_{\alpha\beta} e^{i(\Delta\epsilon'-\Delta\epsilon) t} 
+	\Gamma_{\alpha\beta}(\Delta\epsilon) \{ A_\beta(\Delta\epsilon) \tilde{\rho}_S(t) A_\alpha^\dagger(\Delta\epsilon')
+	- A_\alpha^\dagger(\Delta\epsilon') A_\beta(\Delta\epsilon) \tilde{\rho}_S(t) \} + h.c. \]
+	where $\Gamma_{\alpha\beta}(\Delta\epsilon)$ are the Laplace transform of $C_{\alpha\beta}$
+	\[ \Gamma_{\alpha\beta} (\Delta\epsilon) = \int_{0}^{t} \dd \tau\, e^{i\Delta\epsilon t} C_{\alpha\beta}(\tau) \]
+	If $\Delta\epsilon=\Delta\epsilon'$, the oscillations cancel and we get a large contribution.
+	
+	\section{Lecture (Taddei)}
+	
+	\section{Lecture}
+	\subsection{Finishing the GKSL equation}
+	Rewriting the equation for $\dot{\tilde{\rho}}$ from last time and setting $\Delta\epsilon=\Delta\epsilon'$ we get
+	\[ \dot{\tilde{\rho}}_S(t) = \sum_{\Delta\epsilon} \sum_{\alpha\beta} 
+	\Gamma_{\alpha\beta}(\Delta\epsilon) \{ A_\beta(\Delta\epsilon) \tilde{\rho}_S(t) A_\alpha^\dagger(\Delta\epsilon)
+	- A_\alpha^\dagger(\Delta\epsilon) A_\beta(\Delta\epsilon) \tilde{\rho}_S(t) \} + h.c. \]
+	Let us decompose $\Gamma_{\alpha\beta}(\Delta\omega)$ into its hermitean and anti-hermitean part
+	\[ \Gamma_{\alpha\beta}(\Delta\omega) = \dfrac{\gamma_{\alpha\beta}(\Delta\omega)}{2} + i S_{\alpha\beta} (\Delta\omega) \]
+	Then, substituting,
+	\[ \dot{\tilde{\rho}}_S(t) = -i[H_{LS}, \tilde{\rho}_S(t)] + \mathcal{D}[\tilde{\rho}_S(t)] \]
+	where $H_{LS}$ is called the Lamb shift hamiltonian, and $\{A,B\} \equiv AB+BA$.
+	\[ H_{LS} = \sum_{\Delta\omega} \sum_{\alpha\beta} S_{\alpha\beta}(\Delta\omega) A_\alpha^\dagger(\Delta\omega) A_\beta(\Delta\omega) \]
+	\[ \mathcal{D}[\theta] = \sum_{\Delta\omega} \sum_{\alpha\beta} \gamma_{\alpha\beta}(\Delta\omega)
+	\left[ A_\beta(\Delta\omega) \theta A_\alpha^\dagger(\Delta\omega) - \frac{1}{2} \{A_\alpha^\dagger(\Delta\omega)
+	A_\beta(\Delta\omega), \theta\} \right] \]
+	The final step is to diagonalize $\gamma_{\alpha\beta}(\Delta\omega) = \sum_\gamma() u_{\alpha\gamma}(\Delta\omega) K_{\gamma\gamma}(\Delta\omega) u^\dagger_{\gamma\beta}(\Delta\omega)$, which can always be done because $\gamma_{\alpha\beta}(\Delta\omega)$ is hermitean. It can also be shown (??) %TODO
+	that $\gamma_{\alpha\beta}(\Delta\omega)\ge 0$. Proof: from
+	\begin{enumerate}
+		\item $\gamma_{\alpha\beta}(\Delta\omega) = \Gamma_{\alpha\beta}(\Delta\omega) + \Gamma^*_{\beta\alpha}(\Delta\omega)$
+		\item $\Gamma_{\alpha\beta}(\Delta\epsilon) = \int_{0}^{\infty} \dd \tau\, e^{i\Delta\epsilon\tau} C_{\alpha\beta}$
+		\item $C_{\alpha\beta}(t) = C_{\beta\alpha}^*(-\tau)$
+	\end{enumerate}
+	it is easily shown that
+	\[ \gamma_{\alpha\beta}(\Delta\omega) = \int_{-\infty}^{\infty} \dd\tau\, e^{i\Delta\omega \tau} C_{\alpha\beta}(\tau) \]
+	(what then?)
+	
+	Therefore $K_{\gamma\gamma}\ge 0$. Defining
+	\[ L_\gamma(\Delta\omega) = u^\dagger_{\gamma\beta}(\Delta\omega)A_\beta(\Delta\omega),
+	\qquad L_k = \sqrt{\dfrac{K_{\gamma\gamma}(\Delta\omega)}{2}} L_\gamma(\Delta\omega) \]
+	we finish.
+	\[ \dot{\tilde{\rho}}_S(t) = -i[H_{LS}, \tilde{\rho}_S(t)] + \sum_k \left( 2L_k \tilde{\rho}_S(t) L_k^\dagger -
+	\{ L_k^\dagger L_k, \tilde{\rho}_S(t) \} \right) \]
+	\[ \dot{\rho}_S(t) = -i[H_{LS}+H_S, {\rho}_S(t)] + \sum_k \left( 2L_k {\rho}_S(t) L_k^\dagger -
+	\{ L_k^\dagger L_k, {\rho}_S(t) \} \right) \]
+	where we used that $[H_S, H_{LS}]=0$.%TODO: sarebbe da dimostrare, ma sto morendo e ci proverò un altro giorno
+	
+	\subsection{Final remarks}
+	\subsubsection{Non uniqueness of the decomposition of $\LL$}
+	The decomposition $\LL \rightarrow (H,\,\{L_k\})$ is not unique. Every other possible decomposition can be obtained from a given one by exploiting the following two invariances
+	\begin{enumerate}
+		\item $L_k\rightarrow L'_k = \sum_j u_{kj}L_j,\quad H\rightarrow H$. $u$ unitary
+		\item $L_k\rightarrow L'_k = L_k + a_k \hat{1},\quad H\rightarrow H'=H + \frac{1}{2i} \sum_k (a_k^* L_k
+		- a_k L_k^\dagger) + c \hat{1}$. $a_k\in \mathbb{C}$, $c\in \mathbb{R}$
+	\end{enumerate}
+
+	\subsection{Examples of master equations}
+	\subsubsection{Dissipative Bloch equation}
+	Consider a two level system with states $\ket{g}$ (ground) and $\ket{e}$ (excited). The master equation of the model is
+	\[ \pderiv{\rho}{t}(t) = -i [H, \rho(t)] + \gamma \left[ 2\sigma_- \rho(t) \sigma_+ - 
+	\sigma_+ \sigma_- \rho(t) - \rho(t) \sigma_+ \sigma_- \right],\qquad \sigma_-=\sigma_+^\dagger = \ket{0}\bra{1} \]
+	\[ H = \frac{\omega}{2} \left[ \ket{e}\bra{e} - \ket{g}\bra{g} \right] \]
+	where $\gamma\ge 0$ is called dissipative rate.
+	
+	The energy is dissipated in a time scale $\gamma^{-1}$ and the system ends up in the ground state. The resulting quantum channel $\Phi_t$ is an $\mathbf{amplitude\,damping}$ channel.
 	
 	\newpage
 	The end.
